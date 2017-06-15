@@ -18,4 +18,19 @@
         <property name="jtaTransactionManager" ref="transactionManager" />
     </bean>
 
+
+    <bean id="adminHibernateTemplate" class="org.truenewx.data.orm.hibernate.HibernateTemplate">
+        <property name="sessionFactory" ref="adminSessionFactory" />
+    </bean>
+
+    <bean id="adminSessionFactory" parent="sessionFactory">
+        <property name="schema" value="admin" />
+        <property name="dataSource" ref="adminDataSource" />
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:META-INF/hbm/admin/*.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
 </beans>

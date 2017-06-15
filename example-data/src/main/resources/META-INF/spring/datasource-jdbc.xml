@@ -24,7 +24,7 @@
         <property name="pinGlobalTxToPhysicalConnection" value="true" />
         <property name="serverName" value="${db.host}" />
         <property name="port" value="${db.port}" />
-        <property name="databaseName" value="${db.name}" />
+        <property name="databaseName" value="example_core" />
         <property name="useUnicode" value="true" />
         <property name="characterEncoding">
             <util:constant static-field="org.truenewx.core.Strings.DEFAULT_ENCODING" />
@@ -34,6 +34,16 @@
         </property>
         <property name="user" value="${db.username}" />
         <property name="password" value="${db.password}" />
+    </bean>
+
+    <bean id="adminDataSource" parent="dataSource" destroy-method="close">
+        <property name="uniqueResourceName" value="AdminDataSource" />
+        <property name="xaDataSource" ref="adminXaDataSource" />
+    </bean>
+
+    <bean id="adminXaDataSource" parent="xaDataSource">
+        <property name="pinGlobalTxToPhysicalConnection" value="true" />
+        <property name="databaseName" value="example_admin" />
     </bean>
 
 </beans>

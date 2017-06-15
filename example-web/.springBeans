@@ -22,8 +22,12 @@
 				<config>src/main/resources/META-INF/spring/web-menu.xml</config>
 				<config>src/main/resources/META-INF/spring/web-security.xml</config>
 				<config>src/main/webapp/WEB-INF/web-mvc.xml</config>
+				<config>/example-data/src/main/resources/META-INF/spring/data-orm.xml</config>
+				<config>/example-data/src/main/resources/META-INF/spring/datasource-jdbc.xml</config>
+				<config>/example-data/src/main/resources/META-INF/spring/data-tx.xml</config>
 			</configs>
 			<profiles>
+				<profile><![CDATA[local]]></profile>
 			</profiles>
 		</configSet>
 	</configSets>

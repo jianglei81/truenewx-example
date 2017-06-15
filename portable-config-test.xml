@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portable-config>
+    <config-file path="WEB-INF/web.xml" type=".xml">
+        <replace xpath="/web-app/context-param[@id='profile']/param-value">test</replace>
+    </config-file>
+</portable-config>

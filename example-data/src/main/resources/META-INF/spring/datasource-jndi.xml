@@ -11,7 +11,10 @@
         <prop key="hibernate.jdbc.batch_size">20</prop>
     </util:properties>
 
-    <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/datasource/truenewx/example"
+    <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/datasource/truenewx/example/core"
+        cache="true" resource-ref="true" lookup-on-startup="true" />
+
+    <jee:jndi-lookup id="adminXataSource" jndi-name="java:comp/env/datasource/truenewx/example/admin"
         cache="true" resource-ref="true" lookup-on-startup="true" />
 
 </beans>

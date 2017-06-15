@@ -30,4 +30,22 @@
         </property>
     </bean>
 
+    <bean id="adminDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close">
+        <property name="uniqueResourceName" value="AdminDataSource" />
+        <property name="minPoolSize" value="1" />
+        <property name="poolSize" value="2" />
+        <property name="maxPoolSize" value="5" />
+        <property name="testQuery" value="select 1" />
+        <property name="xaDataSource" ref="adminXaDataSource" />
+    </bean>
+
+    <bean id="adminXaDataSource" class="org.truenewx.test.spring.jdbc.datasource.H2XADataSourceFactoryBean">
+        <property name="dataSource">
+            <jdbc:embedded-database type="H2">
+                <jdbc:script location="classpath:sql/junit/create/admin.sql" />
+                <jdbc:script location="classpath:sql/junit/init/admin.sql" />
+            </jdbc:embedded-database>
+        </property>
+    </bean>
+
 </beans>
