@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName" xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd    
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="defaultExecutor" class="org.truenewx.core.util.concurrent.DefaultThreadPoolExecutor">
+        <constructor-arg index="0" value="4" />
+        <constructor-arg index="1" value="16" />
+    </bean>
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+
+    <bean id="messageSource" class="org.truenewx.core.spring.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <array>
+                <value>classpath:org/hibernate/validator/ValidationMessages</value>
+                <value>classpath*:META-INF/message/error/*</value>
+                <value>classpath*:META-INF/message/info/*</value>
+                <value>classpath*:META-INF/message/constant/*</value>
+            </array>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="true" />
+        <property name="defaultEncoding">
+            <util:constant static-field="org.truenewx.core.Strings.DEFAULT_ENCODING" />
+        </property>
+        <property name="cacheSeconds" value="60" />
+    </bean>
+
+    <bean id="eventBus" name="eventPoster, eventRegistrar" class="org.truenewx.core.event.EventBusImpl">
+        <constructor-arg index="0" ref="defaultExecutor" />
+    </bean>
+
+</beans>
