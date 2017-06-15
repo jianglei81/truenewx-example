@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName" xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="hibernateTemplate" class="org.truenewx.data.orm.hibernate.HibernateTemplate" />
+
+    <bean id="sessionFactory" class="org.truenewx.data.orm.hibernate.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:META-INF/hbm/*.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties" ref="hibernateProperties" />
+        <property name="jtaTransactionManager" ref="transactionManager" />
+    </bean>
+
+</beans>

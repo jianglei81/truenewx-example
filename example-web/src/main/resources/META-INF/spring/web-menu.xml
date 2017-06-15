@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="menuFactory" class="org.truenewx.web.menu.MenuFactoryImpl">
+        <property name="resources">
+            <array>
+                <value>classpath:/META-INF/menu.xml</value>
+            </array>
+        </property>
+        <property name="parser">
+            <bean class="org.truenewx.web.menu.parse.XmlMenuParser" />
+        </property>
+    </bean>
+
+    <bean id="menuResolver" class="org.truenewx.web.menu.DefaultMenuResolver">
+        <constructor-arg index="0" value="admin" />
+        <constructor-arg index="1" ref="menuFactory" />
+    </bean>
+
+</beans>

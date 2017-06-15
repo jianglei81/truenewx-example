@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 4.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.creawor.fox.data.model.Manager" table="t_manager">
+        <id name="id" type="java.lang.Integer" column="id">
+            <generator class="native" />
+        </id>
+        <property name="username" type="string" column="username" not-null="true" length="16" />
+        <property name="password" type="string" column="password" not-null="false" length="32" />
+        <property name="createTime" type="timestamp" column="create_time" not-null="true" />
+    </class>
+</hibernate-mapping>
