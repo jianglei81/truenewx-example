@@ -10,7 +10,6 @@
 		<config>src/main/resources/META-INF/spring/datasource-jdbc.xml</config>
 		<config>src/main/resources/META-INF/spring/data-tx.xml</config>
 		<config>src/main/resources/META-INF/spring/data-orm.xml</config>
-		<config>src/main/resources/META-INF/spring/datasource-jndi.xml</config>
 		<config>src/main/resources/META-INF/spring/datasource-embedded.xml</config>
 	</configs>
 	<autoconfigs>

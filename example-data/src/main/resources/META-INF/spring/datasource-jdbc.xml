@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans profile="local,dev" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans profile="local,dev,test,product" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:util="http://www.springframework.org/schema/util"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
@@ -7,8 +7,8 @@
 
     <util:properties id="hibernateProperties">
         <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-        <prop key="hibernate.show_sql">true</prop>
-        <prop key="hibernate.jdbc.batch_size">10</prop>
+        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+        <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
     </util:properties>
 
     <bean id="dataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close">
@@ -22,8 +22,8 @@
 
     <bean id="xaDataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
         <property name="pinGlobalTxToPhysicalConnection" value="true" />
-        <property name="serverName" value="${db.host}" />
-        <property name="port" value="${db.port}" />
+        <property name="serverName" value="${ds.serverName}" />
+        <property name="port" value="${ds.port}" />
         <property name="databaseName" value="example_core" />
         <property name="useUnicode" value="true" />
         <property name="characterEncoding">
@@ -32,8 +32,8 @@
         <property name="characterSetResults">
             <util:constant static-field="org.truenewx.core.Strings.DEFAULT_ENCODING" />
         </property>
-        <property name="user" value="${db.username}" />
-        <property name="password" value="${db.password}" />
+        <property name="user" value="${ds.username}" />
+        <property name="password" value="${ds.password}" />
     </bean>
 
     <bean id="adminDataSource" parent="dataSource" destroy-method="close">

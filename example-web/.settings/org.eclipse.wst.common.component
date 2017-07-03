@@ -16,10 +16,19 @@
         <dependent-module archiveName="truenewx-core-1.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/truenewx-core/truenewx-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="example-service-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/example-service/example-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="example-data-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/example-data/example-data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="truenewx-data-hibernate-1.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/truenewx-data-hibernate/truenewx-data-hibernate">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="truenewx-test-1.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/truenewx-test/truenewx-test">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="example-config-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/example-config/example-config">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/example-web/target/classes"/>
