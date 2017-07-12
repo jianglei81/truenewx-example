@@ -1,1 +1,31 @@
-;
+CREATE TABLE T_MANAGER (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ username VARCHAR(20) NOT NULL,
+ password CHAR(64),
+ fullname VARCHAR(20) NOT NULL,
+ top TINYINT DEFAULT 0 NOT NULL,
+ disabled TINYINT NOT NULL,
+ create_time TIMESTAMP NOT NULL
+);
+
+
+CREATE TABLE T_ROLE (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(32) NOT NULL,
+ remark VARCHAR(200),
+ ordinal BIGINT NOT NULL,
+ permission_string VARCHAR(4000)
+);
+
+
+CREATE TABLE T_MANAGER_R_ROLE (
+ manager_id INT NOT NULL,
+ role_id INT NOT NULL,
+
+ PRIMARY KEY (manager_id,role_id),
+
+ FOREIGN KEY (manager_id) REFERENCES T_MANAGER (id),
+ FOREIGN KEY (role_id) REFERENCES T_ROLE (id)
+);
+
+

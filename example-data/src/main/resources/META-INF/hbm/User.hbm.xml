@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 4.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="org.truenewx.example.data.model.user.User" table="T_USER">
+        <id name="id" type="java.lang.Long" column="id">
+            <generator class="native" />
+        </id>
+        <property name="email" column="email" type="string" length="320" not-null="true" />
+        <property name="password" column="password" type="string" length="64" not-null="true" />
+        <property name="fullname" column="fullname" type="string" length="20" not-null="true" />
+        <property name="createTime" column="create_time" type="timestamp" />
+        <property name="sex" column="sex">
+            <type name="org.truenewx.hibernate.usertype.EnumValueMapType">
+                <param name="class">org.truenewx.example.data.model.user.Sex</param>
+            </type>
+        </property>
+        <property name="disabled" column="disabled" type="boolean" not-null="true"/>
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 4.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.truenewx.example.data.model.manager.Role" table="T_ROLE">
+        <id name="id" type="java.lang.Integer" column="id">
+            <generator class="native" />
+        </id>
+        <property name="name" type="string" column="name" not-null="true" length="20" />
+        <property name="remark" type="string" column="remark" not-null="false" length="200" />
+        <property name="ordinal" type="long" column="ordinal" not-null="true" />
+        <property name="permissions" column="permission_string" not-null="false">
+            <type name="org.truenewx.hibernate.usertype.SetJsonMapType" />
+        </property>
+        <set name="managers" table="T_MANAGER_R_ROLE">
+            <key>
+                <column name="role_id"/>
+            </key>
+            <many-to-many column="manager_id" class="org.truenewx.example.data.model.manager.Manager"/>
+         </set>
+    </class>
+</hibernate-mapping>

@@ -3,12 +3,21 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.creawor.fox.data.model.Manager" table="t_manager">
+    <class name="org.truenewx.example.data.model.manager.Manager" table="T_MANAGER">
         <id name="id" type="java.lang.Integer" column="id">
             <generator class="native" />
         </id>
-        <property name="username" type="string" column="username" not-null="true" length="16" />
-        <property name="password" type="string" column="password" not-null="false" length="32" />
-        <property name="createTime" type="timestamp" column="create_time" not-null="true" />
+        <property name="username" type="string" column="username" not-null="true" length="20" />
+        <property name="password" type="string" column="password" not-null="false" length="64" />
+        <property name="fullname" type="string" column="fullname" not-null="true" length="20" />
+        <property name="top" type="boolean" column="top" not-null="true" />
+        <property name="disabled" type="boolean" column="disabled" not-null="true" />
+        <property name="createTime" type="timestamp" column="create_time" />
+        <set name="roles" table="T_MANAGER_R_MANAGER_ROLE">
+            <key>
+                <column name="manager_id" />
+            </key>
+            <many-to-many column="role_id" class="org.truenewx.example.data.model.manager.Role" />
+        </set>
     </class>
 </hibernate-mapping>

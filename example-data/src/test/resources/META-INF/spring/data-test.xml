@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans profile="junit" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="textFileContentConverter" class="org.truenewx.core.io.TextFileContentConverter">
+        <property name="textContentConverter">
+            <bean class="org.truenewx.core.io.TextContentReplaceConverter">
+                <constructor-arg>
+                    <map>
+                        <entry key="INT NOT NULL PRIMARY KEY," value="INT NOT NULL AUTO_INCREMENT PRIMARY KEY," />
+                        <entry key="'CURRENT_TIMESTAMP'" value="CURRENT_TIMESTAMP" />
+                        <entry key="TIMESTAMP," value="TIMESTAMP NULL," />
+                        <entry key="TIMESTAMP\r" value="TIMESTAMP NULL" />
+                    </map>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

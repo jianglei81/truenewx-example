@@ -11,6 +11,7 @@
 		<config>src/main/resources/META-INF/spring/data-tx.xml</config>
 		<config>src/main/resources/META-INF/spring/data-orm.xml</config>
 		<config>src/main/resources/META-INF/spring/datasource-embedded.xml</config>
+		<config>src/test/resources/META-INF/spring/data-test.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
