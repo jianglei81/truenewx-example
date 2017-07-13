@@ -1,5 +1,6 @@
 package org.truenewx.example.data.model.manager;
 
+import org.truenewx.core.annotation.Caption;
 import org.truenewx.data.model.CloneableForSession;
 
 /**
@@ -8,6 +9,7 @@ import org.truenewx.data.model.CloneableForSession;
  * @author jianglei
  * @since JDK 1.8
  */
+@Caption("角色")
 public class Role extends AbstractRole implements CloneableForSession<Role> {
 
     @Override
