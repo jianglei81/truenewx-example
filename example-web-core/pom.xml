@@ -8,9 +8,9 @@
         <version>1.0.0</version>
     </parent>
     <groupId>org.truenewx.example</groupId>
-    <artifactId>example-web</artifactId>
+    <artifactId>example-web-core</artifactId>
     <packaging>war</packaging>
-    <profiles>
+  <profiles>
         <profile>
             <id>dev</id>
             <properties>
@@ -34,7 +34,7 @@
         </profile>
     </profiles>
     <build>
-        <finalName>example</finalName>
+        <finalName>example-core</finalName>
         <plugins>
             <plugin>
                 <groupId>com.juvenxu.portable-config-maven-plugin</groupId>

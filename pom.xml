@@ -16,7 +16,8 @@
         <module>example-config</module>
         <module>example-data</module>
         <module>example-service</module>
-        <module>example-web</module>
+        <module>example-web-admin</module>
+        <module>example-web-core</module>
     </modules>
     <dependencyManagement>
         <dependencies>

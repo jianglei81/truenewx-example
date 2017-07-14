@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/">
+    <excludes>
+        <pattern>/header*</pattern>
+        <pattern>/footer*</pattern>
+        <pattern>/third/*</pattern>
+        <pattern>/assets/*</pattern>
+        <pattern>**/*.htm</pattern>
+        <pattern>*.json</pattern>
+        <pattern>*.json?*</pattern>
+        <pattern>/version/*</pattern>
+    </excludes>
+    <decorator name="win" page="dec/win.jsp">
+        <pattern>**/*.win</pattern>
+    </decorator>
+    <decorator name="ajax" page="dec/ajax.jsp">
+        <pattern>**/*.ajax</pattern>
+    </decorator>
+    <decorator name="default" page="dec/default.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>
