@@ -4,14 +4,14 @@
 <script type="text/javascript">
 var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
     .script("${resContext}/vendor/core/sugar-1.4.1.min.js")
-    .script("${resContext}/vendor/jquery/2.1.4/jquery.min.js").wait()
+    .script("${resContext}/vendor/jquery/1.11.3/jquery.min.js").wait()
     .script("${resContext}/vendor/jquery/plugins/jquery.json-2.4.0.min.js")
-    .script("${resContext}/vendor/bootstrap/3.3.5/js/bootstrap.js")
+    .script("${resContext}/vendor/zui/1.7.0/js/zui.min.js")
     .script("${resContext}/component/core/prototype.js")
     .script("${resContext}/component/core/truenewx.js").wait(function() {
         $.tnx.locale = "${pageContext.request.locale}";
         $.tnx.pager.contextPath = "${context}";
-    }).script("${resContext}/component/core/truenewx-bs3.js")
+    }).script("${resContext}/component/core/truenewx-zui.js")
     .script("${resContext}/component/core/truenewx-domain.js").wait(function() {
         $.tnx.domain.site.path.context = "${context}";
         $.tnx.domain.site.path.resContext = "${resContext}";
@@ -24,7 +24,3 @@ var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
     }
 </c:if>
 </script>
-<!--[if lt IE 9]>
-<script type="text/javascript" src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
-<script type="text/javascript" src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->

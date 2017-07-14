@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-brand" style="padding-top: 5px; padding-bottom: 5px;">
-                <a href="${context}/"><img src="${context}/assets/image/logo.png"/></a>
+                <a href="${context}/">Example</a>
             </div>
         </div>
         <nav class="collapse navbar-collapse" role="navigation">

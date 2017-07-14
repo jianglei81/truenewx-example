@@ -39,15 +39,13 @@
         </bean>
         <bean class="org.truenewx.web.security.interceptor.SecurityValidateInterceptor">
             <property name="excludeUrlPatterns">
-                <list>
-                    <list>
+                <array>
                     <value>/login*</value>
                     <value>/logout*</value>
                     <value>/assets/*</value>
                     <value>/third/*</value>
                     <value>/*.txt</value>
-                </list>
-                </list>
+                </array>
             </property>
             <property name="loginUrl" value="/login?next={0}" />
         </bean>

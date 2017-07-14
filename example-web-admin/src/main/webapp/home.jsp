@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<title>主页</title>
+<title>首页</title>
 </head>
 
 <body>
