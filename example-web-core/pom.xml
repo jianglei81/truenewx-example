@@ -10,7 +10,7 @@
     <groupId>org.truenewx.example</groupId>
     <artifactId>example-web-core</artifactId>
     <packaging>war</packaging>
-  <profiles>
+    <profiles>
         <profile>
             <id>dev</id>
             <properties>
