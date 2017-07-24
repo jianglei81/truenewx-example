@@ -6,16 +6,19 @@ package org.truenewx.example.service.manager;
  * @author jianglei
  * @since JDK 1.8
  */
-public interface ManagerExceptionCodes {
+public class ManagerExceptionCodes {
+
+    private ManagerExceptionCodes() {
+    }
 
     /**
      * 用户名或密码错误
      */
-    String USERNAME_OR_PASSWORD_ERROR = "error.manager.username_or_password_error";
+    public static final String USERNAME_OR_PASSWORD_ERROR = "error.manager.username_or_password_error";
 
     /**
      * 管理员被禁用
      */
-    String DISABLED_MANAGER = "error.manager.disabled_manager";
+    public static final String DISABLED_MANAGER = "error.manager.disabled_manager";
 
 }

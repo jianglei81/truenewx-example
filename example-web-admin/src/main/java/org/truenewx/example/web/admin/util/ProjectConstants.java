@@ -6,8 +6,11 @@ package org.truenewx.example.web.admin.util;
  * @author jianglei
  * @since JDK 1.8
  */
-public interface ProjectConstants {
+public class ProjectConstants {
 
-    String COOKIE_USERNAME = "username";
+    private ProjectConstants() {
+    }
+
+    public static final String COOKIE_USERNAME = "username";
 
 }
