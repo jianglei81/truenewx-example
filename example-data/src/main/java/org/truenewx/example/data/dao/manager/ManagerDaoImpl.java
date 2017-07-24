@@ -14,4 +14,10 @@ import org.truenewx.example.data.model.manager.Manager;
 public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
         implements ManagerDao {
 
+    @Override
+    public Manager findByUsername(final String username) {
+        final String hql = "from Manager where username=:username";
+        return getHibernateTemplate().first(hql, "username", username);
+    }
+
 }

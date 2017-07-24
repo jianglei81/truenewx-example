@@ -11,4 +11,6 @@ import org.truenewx.example.data.model.manager.Manager;
  */
 public interface ManagerDao extends UnityDao<Manager, Integer> {
 
+    Manager findByUsername(String username);
+
 }

@@ -1,5 +1,6 @@
 package org.truenewx.example.service.manager;
 
+import org.truenewx.core.exception.BusinessException;
 import org.truenewx.example.data.model.manager.Manager;
 import org.truenewx.service.unity.ModelUnityService;
 
@@ -10,5 +11,7 @@ import org.truenewx.service.unity.ModelUnityService;
  * @since JDK 1.8
  */
 public interface ManagerService extends ModelUnityService<Manager, Integer> {
+
+    Manager validateLogin(String username, String md5Password) throws BusinessException;
 
 }
