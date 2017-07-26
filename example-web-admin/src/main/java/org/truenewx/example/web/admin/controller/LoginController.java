@@ -31,6 +31,9 @@ public class LoginController implements Loginer {
     @RequestMapping(method = RequestMethod.GET)
     @ValidationGeneratable(Manager.class)
     public String get() {
+        if (ProjectWebUtil.getManager() != null) { // 如果已经登录，则跳转到首页
+            return "redirect:/index";
+        }
         return "/login";
     }
 
@@ -48,7 +51,7 @@ public class LoginController implements Loginer {
             return "redirect:" + next;
         }
 
-        return "redirect:/person/index";
+        return "redirect:/index";
     }
 
     @Override
