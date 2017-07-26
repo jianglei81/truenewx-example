@@ -38,11 +38,16 @@ public class ManagerRealm implements Realm<Manager> {
     private MenuResolver menuResolver;
 
     @Override
+    public Class<Manager> getUserClass() {
+        return Manager.class;
+    }
+
+    @Override
     public LoginInfo getLoginInfo(final LoginToken loginToken) throws HandleableException {
-        final String username = (String) loginToken.getCredentials();
-        final String md5Password = (String) loginToken.getPrincipal();
+        final String username = (String) loginToken.getPrincipal();
+        final String md5Password = (String) loginToken.getCredentials();
         final Manager manager = this.managerService.validateLogin(username, md5Password);
-        final DefaultLoginInfo loginInfo = new DefaultLoginInfo(manager);
+        final DefaultLoginInfo loginInfo = new DefaultLoginInfo(manager.cloneForSession());
         final Cookie usernameCookie = WebUtil.createCookie(ProjectConstants.COOKIE_USERNAME,
                 username, Integer.MAX_VALUE, true, Strings.SLASH);
         loginInfo.addCookie(usernameCookie);

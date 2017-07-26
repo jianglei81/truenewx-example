@@ -1,6 +1,7 @@
 package org.truenewx.example.service.manager;
 
 import org.truenewx.core.exception.BusinessException;
+import org.truenewx.data.query.QueryResult;
 import org.truenewx.example.data.model.manager.Manager;
 import org.truenewx.service.unity.ModelUnityService;
 
@@ -13,5 +14,7 @@ import org.truenewx.service.unity.ModelUnityService;
 public interface ManagerService extends ModelUnityService<Manager, Integer> {
 
     Manager validateLogin(String username, String md5Password) throws BusinessException;
+
+    QueryResult<Manager> findByKeyword(String keyword, int pageSize, int pageNo);
 
 }

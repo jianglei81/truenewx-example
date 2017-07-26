@@ -8,7 +8,7 @@ site.requiredClass = "required";
 
 $.extend(site.components, {
     "jquery-ui" : site.path.context + "/third/jquery/ui/js/jquery-ui.js",
-    "validate" : [ site.path.resContext + "/component/core/truenewx-validate.js"],
+    "validate" : [ site.path.resContext + "/component/core/truenewx-validate.js" ],
     "md5" : site.path.resContext + "/vendor/core/md5-2.1.js",
     "input-limiter" : site.path.resContext + "/component/input-limiter/js/input-limiter.js",
     "ckeditor" : site.path.resContext + "/vendor/ckeditor/4.5.10/ckeditor.js",
@@ -89,5 +89,5 @@ $.extend($.tnx.rpc, {
 });
 
 $(function() {
-    site.init();
+    $.tnx.imports([ site.path.js + "/site/header.js" ], site.init);
 });

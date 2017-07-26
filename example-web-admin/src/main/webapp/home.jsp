@@ -4,8 +4,16 @@
 <html lang="zh-cn">
 <head>
 <title>首页</title>
+<style type="text/css">
+body {
+    display: none;
+}
+</style>
 </head>
 
 <body>
+<script type="text/javascript">
+window.location.href = "${context}/index";
+</script>
 </body>
 </html>

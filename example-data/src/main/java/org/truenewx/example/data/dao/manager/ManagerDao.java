@@ -1,6 +1,7 @@
 package org.truenewx.example.data.dao.manager;
 
 import org.truenewx.data.orm.dao.UnityDao;
+import org.truenewx.data.query.QueryResult;
 import org.truenewx.example.data.model.manager.Manager;
 
 /**
@@ -12,5 +13,7 @@ import org.truenewx.example.data.model.manager.Manager;
 public interface ManagerDao extends UnityDao<Manager, Integer> {
 
     Manager findByUsername(String username);
+
+    QueryResult<Manager> findByKeyword(String keyword, int pageSize, int pageNo);
 
 }

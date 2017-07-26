@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.truenewx.core.encrypt.Md5xEncrypter;
 import org.truenewx.core.exception.BusinessException;
 import org.truenewx.data.orm.dao.UnityDao;
+import org.truenewx.data.query.QueryResult;
 import org.truenewx.example.data.dao.manager.ManagerDao;
 import org.truenewx.example.data.model.manager.Manager;
 import org.truenewx.service.unity.AbstractUnityService;
@@ -44,6 +45,12 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
             throw new BusinessException(ManagerExceptionCodes.DISABLED_MANAGER);
         }
         return manager;
+    }
+
+    @Override
+    public QueryResult<Manager> findByKeyword(final String keyword, final int pageSize,
+            final int pageNo) {
+        return this.dao.findByKeyword(keyword, pageSize, pageNo);
     }
 
 }

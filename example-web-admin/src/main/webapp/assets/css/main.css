@@ -1,5 +1,21 @@
 .logo {
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 5px;
-    font-size: 40;
+    font-size: 22px;
+}
+
+footer {
+    border-top: 1px solid #dedede;
+    margin-top: 5px;
+    padding-top: 15px;
+}
+
+.bottom-block {
+    margin-bottom: 0px;
+}
+
+.title {
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
 }

@@ -7,5 +7,7 @@
 </head>
 
 <body>
+<h1 class="text-center">欢迎进入后台管理中心</h1>
+<h1>&nbsp;</h1>
 </body>
 </html>

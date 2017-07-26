@@ -13,7 +13,7 @@
         <property name="top" type="boolean" column="top" not-null="true" />
         <property name="disabled" type="boolean" column="disabled" not-null="true" />
         <property name="createTime" type="timestamp" column="create_time" />
-        <set name="roles" table="T_MANAGER_R_MANAGER_ROLE">
+        <set name="roles" table="T_MANAGER_R_ROLE">
             <key>
                 <column name="manager_id" />
             </key>

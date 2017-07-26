@@ -15,6 +15,22 @@
             </div>
         </div>
         <nav class="collapse navbar-collapse" role="navigation">
+        <c:if test="${manager != null}">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span id="managerName">${manager.fullname}</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:site.header.controller.profile()">个人资料</a></li>
+                        <li><a href="javascript:site.header.controller.updatePassword()" id="linkUpdatePassword">修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="${context}/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </c:if>
         </nav>
     </div>
 </header>
