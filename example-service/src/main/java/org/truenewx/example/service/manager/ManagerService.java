@@ -17,4 +17,6 @@ public interface ManagerService extends ModelUnityService<Manager, Integer> {
 
     QueryResult<Manager> findByKeyword(String keyword, int pageSize, int pageNo);
 
+    Manager update(int id, String fullname);
+
 }

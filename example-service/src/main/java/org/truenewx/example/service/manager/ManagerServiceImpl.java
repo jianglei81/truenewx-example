@@ -53,4 +53,14 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
         return this.dao.findByKeyword(keyword, pageSize, pageNo);
     }
 
+    @Override
+    public Manager update(final int id, final String fullname) {
+        final Manager manager = find(id);
+        if (manager != null) {
+            manager.setFullname(fullname);
+            this.dao.save(manager);
+        }
+        return manager;
+    }
+
 }
