@@ -47,16 +47,15 @@ site.header.Controller = site.Controller.extend({
                 return;
             }
             $(".alert-danger", dialog).hide();
-            $.tnx.imports(site.components["md5"], function() {
-                oldPassword = hex_md5(oldPassword);
-                newPassword = hex_md5(newPassword);
-                var rpc = $.tnx.rpc.imports("personController");
-                rpc.updatePassword(oldPassword, newPassword, function() {
-                    $(".modal-body", dialog).text("密码修改成功，请使用新密码重新登录"); // 替换对话框内容
-                    $(".modal-footer .btn-default", dialog).remove(); // 移除取消按钮
-                    $(".modal-footer .btn-primary", dialog).click(function() { // 重新确定按钮的处理
-                        window.location.href = site.path.context + "/logout";
-                    });
+
+            oldPassword = hex_md5(oldPassword);
+            newPassword = hex_md5(newPassword);
+            var rpc = $.tnx.rpc.imports("mineController");
+            rpc.updatePassword(oldPassword, newPassword, function() {
+                $(".modal-body", dialog).text("密码修改成功，请使用新密码重新登录"); // 替换对话框内容
+                $(".modal-footer .btn-default", dialog).remove(); // 移除取消按钮
+                $(".modal-footer .btn-primary", dialog).click(function() { // 重新确定按钮的处理
+                    window.location.href = site.path.context + "/logout";
                 });
             });
         }));
