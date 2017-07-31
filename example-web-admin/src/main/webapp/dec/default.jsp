@@ -14,7 +14,12 @@
 <body<decorator:getProperty property="body.required-tag" writeEntireProperty="true"/><decorator:getProperty property="body.required-class" writeEntireProperty="true"/><decorator:getProperty property="body.component" writeEntireProperty="true"/><decorator:getProperty property="body.script" writeEntireProperty="true"/>>
 <jsp:include page="/header"></jsp:include>
 <div class="container">
-<decorator:body/>
+    <div class="col-md-2">
+        <jsp:include page="/menu"></jsp:include>
+    </div>
+    <div class="col-md-10">
+        <decorator:body/>
+    </div>
 </div>
 <jsp:include page="/footer.jsp"></jsp:include>
 <jsp:include page="/link-foot.jsp"></jsp:include>

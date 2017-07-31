@@ -9,6 +9,8 @@
         <pattern>*.json</pattern>
         <pattern>*.json?*</pattern>
         <pattern>/version/*</pattern>
+        <pattern>/login</pattern>
+        <pattern>/login?*</pattern>
     </excludes>
     <decorator name="win" page="dec/win.jsp">
         <pattern>**/*.win</pattern>
