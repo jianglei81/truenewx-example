@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
+import org.truenewx.core.Strings;
 import org.truenewx.data.orm.dao.support.hibernate.HibernateUnityDaoSupport;
 import org.truenewx.data.query.QueryParameterImpl;
 import org.truenewx.data.query.QueryResult;
@@ -33,8 +34,8 @@ public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
         final StringBuffer hql = new StringBuffer("from ").append(entityName);
         final Map<String, Object> params = new HashMap<>();
         if (StringUtils.isNotBlank(keyword)) {
-            hql.append(" where username like :keyword and fullname like :keyword");
-            params.put("keyword", keyword);
+            hql.append(" where username like :keyword or fullname like :keyword");
+            params.put("keyword", Strings.PERCENT + keyword + Strings.PERCENT);
         }
         final QueryParameterImpl parameter = new QueryParameterImpl(pageSize, pageNo);
         parameter.setOrder("username", Boolean.FALSE);
