@@ -29,16 +29,18 @@ public class MenuController {
             final HttpServletResponse response) {
         final ModelAndView mav = new ModelAndView("menu");
         final Menu menu = ProjectWebUtil.getMenu();
-        mav.addObject("menu", menu);
-        final HttpMethod method = HttpMethod.valueOf(request.getMethod());
-        final String href = WebUtil.getRelativeRequestUrl(request);
-        final List<Binate<Integer, MenuAction>> indexes = menu.indexesOf(href, method);
-        if (indexes != null) {
-            if (indexes.size() > 0) {
-                mav.addObject("level1ActiveIndex", indexes.get(0).getLeft());
-            }
-            if (indexes.size() > 1) {
-                mav.addObject("level2ActiveIndex", indexes.get(1).getLeft());
+        if (menu != null) {
+            mav.addObject("menu", menu);
+            final HttpMethod method = HttpMethod.valueOf(request.getMethod());
+            final String href = WebUtil.getRelativeRequestUrl(request);
+            final List<Binate<Integer, MenuAction>> indexes = menu.indexesOf(href, method);
+            if (indexes != null) {
+                if (indexes.size() > 0) {
+                    mav.addObject("level1ActiveIndex", indexes.get(0).getLeft());
+                }
+                if (indexes.size() > 1) {
+                    mav.addObject("level2ActiveIndex", indexes.get(1).getLeft());
+                }
             }
         }
         return mav;

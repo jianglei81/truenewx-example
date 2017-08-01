@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu name="admin" xmlns="http://www.truenewx.org/schema/menu">
 
-    <item caption="系统管理">
-        <item caption="管理员管理" href="/manager/list" role="top">
+    <item caption="系统管理" icon="icon-cogs">
+        <item caption="管理员管理" href="/manager/list" role="top" icon="icon-group">
             <operation caption="添加" role="top">
                 <link href="/manager/add" />
             </operation>
@@ -30,7 +30,7 @@
         </item>
     </item>
 
-    <item caption="用户管理" href="/user/list" permission="USER_LIST">
+    <item caption="用户管理" href="/user/list" permission="USER_LIST" icon="icon-user">
         <operation caption="查看详情" permission="USER_DETAIL">
             <link href="/user/*/detail" />
         </operation>

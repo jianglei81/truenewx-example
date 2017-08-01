@@ -7,19 +7,19 @@
     <c:if test="${empty item.subs}">
         <li<c:if test="${status1.index == level1ActiveIndex}"> class="active"</c:if>>
             <a href="${context}${item.href}">
-                <c:if test="${not empty item.icon}"><i class="${item.icon}"></i> </c:if>${item.caption}
+                <i class="icon ${empty item.icon ? 'icon-blank' : item.icon}"></i> ${item.caption}
             </a>
         </li>
     </c:if><c:if test="${not empty item.subs}">
         <li class="nav-parent<c:if test="${status1.index == level1ActiveIndex}"> active show</c:if>">
             <a href="javascript:;">
-                <c:if test="${not empty item.icon}"><i class="${item.icon}"></i> </c:if>${item.caption}
+                <i class="icon ${empty item.icon ? 'icon-blank' : item.icon}"></i> ${item.caption}
             </a>
             <ul class="nav">
             <c:forEach var="sub" items="${item.subs}" varStatus="status2">
                 <li<c:if test="${status2.index == level2ActiveIndex}"> class="active"</c:if>>
                     <a href="${context}${sub.href}">
-                        <c:if test="${not empty sub.icon}"><i class="${sub.icon}"></i> </c:if>${sub.caption}
+                        <i class="icon ${empty sub.icon ? 'icon-blank' : sub.icon}"></i> ${sub.caption}
                     </a>
                 </li>
             </c:forEach>
