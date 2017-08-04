@@ -8,13 +8,27 @@
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd  
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <beans profile="local">
-        <bean id="placeholderResolver"
-            class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
+    <beans profile="junit">
+        <bean id="placeholderResolver" class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="ignoreResourceNotFound" value="true" />
             <property name="ignoreUnresolvablePlaceholders" value="true" />
             <property name="locations">
                 <array>
+                    <value>classpath:maven.properties</value>
+                    <value>classpath:META-INF/placeholder.properties</value>
+                    <value>classpath:META-INF/placeholder-junit.properties</value>
+                </array>
+            </property>
+        </bean>
+    </beans>
+
+    <beans profile="local">
+        <bean id="placeholderResolver" class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="ignoreResourceNotFound" value="true" />
+            <property name="ignoreUnresolvablePlaceholders" value="true" />
+            <property name="locations">
+                <array>
+                    <value>classpath:maven.properties</value>
                     <value>classpath:META-INF/placeholder.properties</value>
                     <value>classpath:META-INF/placeholder-local.properties</value>
                 </array>
@@ -23,12 +37,12 @@
     </beans>
 
     <beans profile="dev">
-        <bean id="placeholderResolver"
-            class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
+        <bean id="placeholderResolver" class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="ignoreResourceNotFound" value="true" />
             <property name="ignoreUnresolvablePlaceholders" value="true" />
             <property name="locations">
                 <array>
+                    <value>classpath:maven.properties</value>
                     <value>classpath:META-INF/placeholder.properties</value>
                     <value>classpath:META-INF/placeholder-dev.properties</value>
                 </array>
@@ -37,12 +51,12 @@
     </beans>
 
     <beans profile="test">
-        <bean id="placeholderResolver"
-            class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
+        <bean id="placeholderResolver" class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="ignoreResourceNotFound" value="true" />
             <property name="ignoreUnresolvablePlaceholders" value="true" />
             <property name="locations">
                 <array>
+                    <value>classpath:maven.properties</value>
                     <value>classpath:META-INF/placeholder.properties</value>
                     <value>classpath:META-INF/placeholder-test.properties</value>
                 </array>
@@ -55,12 +69,12 @@
     </beans>
 
     <beans profile="product">
-        <bean id="placeholderResolver"
-            class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
+        <bean id="placeholderResolver" class="org.truenewx.core.spring.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="ignoreResourceNotFound" value="true" />
             <property name="ignoreUnresolvablePlaceholders" value="true" />
             <property name="locations">
                 <array>
+                    <value>classpath:maven.properties</value>
                     <value>classpath:META-INF/placeholder.properties</value>
                     <value>classpath:META-INF/placeholder-product.properties</value>
                 </array>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="tnx" uri="/truenewx-tags"%>
 <script type="text/javascript" src="${resContext}/vendor/core/LAB-2.0.3.min.js"></script>
 <script type="text/javascript">
 var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
@@ -15,6 +16,7 @@ var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
     .script("${resContext}/component/core/truenewx-domain.js").wait(function() {
         $.tnx.domain.site.path.context = "${context}";
         $.tnx.domain.site.path.resContext = "${resContext}";
+        $.tnx.domain.site.version = "<tnx:version type="${profile == 'product' ? 'release' : 'build'}"/>";
     }).script("${context}/assets/js/site.js");
     
 <c:if test="${not empty script}">

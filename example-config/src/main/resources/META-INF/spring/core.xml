@@ -11,9 +11,7 @@
             expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <bean class="org.truenewx.core.version.PropertiesVersionReader">
-        <constructor-arg index="0" value="classpath:maven.properties" />
-    </bean>
+    <bean class="org.truenewx.core.version.PlaceholderVersionReader" />
 
     <beans profile="junit">
         <bean id="log4jConfigurer" class="org.truenewx.core.log.Log4jConfigurer">
