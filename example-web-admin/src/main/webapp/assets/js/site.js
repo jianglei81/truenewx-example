@@ -89,5 +89,5 @@ $.extend($.tnx.rpc, {
 });
 
 $(function() {
-    $.tnx.imports([ site.path.js + "/site/header.js" ], site.init);
+    $.tnx.imports(site.path.js + "/site/header.js?v=" + site.version, site.init);
 });
