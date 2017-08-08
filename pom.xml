@@ -9,9 +9,10 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.build.timestamp.format>MddHHmmss</maven.build.timestamp.format>
+        <project.build.timestamp>${maven.build.timestamp}</project.build.timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <truenewx.version>1.1.0</truenewx.version>
-        <truenewx-res.version.build>10000</truenewx-res.version.build>
     </properties>
     <modules>
         <module>example-config</module>
