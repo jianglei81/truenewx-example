@@ -2,11 +2,22 @@
 <menu name="admin" xmlns="http://www.truenewx.org/schema/menu">
 
     <item caption="系统管理" icon="icon-cogs">
+        <item caption="角色管理" href="/role/list" role="top">
+            <operation caption="添加角色" role="top">
+                <link href="/role/add" />
+            </operation>
+            <operation caption="修改角色" role="top">
+                <link href="/role/*/update" />
+            </operation>
+            <operation caption="删除角色" role="top">
+                <link href="/role/*/delete" />
+            </operation>
+        </item>
         <item caption="管理员管理" href="/manager/list" role="top" icon="icon-group">
-            <operation caption="添加" role="top">
+            <operation caption="添加管理员" role="top">
                 <link href="/manager/add" />
             </operation>
-            <operation caption="修改" role="top">
+            <operation caption="修改管理员" role="top">
                 <link href="/manager/*/update" />
             </operation>
             <operation caption="重置密码" role="top">
@@ -17,21 +28,10 @@
                 <rpc id="managerController" method="reverseDisabled" />
             </operation>
         </item>
-        <item caption="角色管理" href="/role/list" role="top">
-            <operation caption="添加" role="top">
-                <link href="/role/add" />
-            </operation>
-            <operation caption="修改" role="top">
-                <link href="/role/*/update" />
-            </operation>
-            <operation caption="删除" role="top">
-                <link href="/role/*/delete" />
-            </operation>
-        </item>
     </item>
 
     <item caption="用户管理" href="/user/list" permission="USER_LIST" icon="icon-user">
-        <operation caption="查看详情" permission="USER_DETAIL">
+        <operation caption="查看用户详情" permission="USER_DETAIL">
             <link href="/user/*/detail" />
         </operation>
         <operation caption="禁用/启用" permission="USER_DISABLE">

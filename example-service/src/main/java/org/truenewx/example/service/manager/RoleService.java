@@ -1,5 +1,7 @@
 package org.truenewx.example.service.manager;
 
+import java.util.List;
+
 import org.truenewx.example.data.model.manager.Role;
 import org.truenewx.service.unity.SimpleUnityService;
 
@@ -10,5 +12,7 @@ import org.truenewx.service.unity.SimpleUnityService;
  * @since JDK 1.8
  */
 public interface RoleService extends SimpleUnityService<Role, Integer> {
+
+    List<Role> findAll();
 
 }

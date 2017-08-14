@@ -18,6 +18,7 @@
         <jsp:include page="/menu"></jsp:include>
     </div>
     <div class="col-md-10">
+        <jsp:include page="/breadcrumb"></jsp:include>
         <decorator:body/>
     </div>
 </div>

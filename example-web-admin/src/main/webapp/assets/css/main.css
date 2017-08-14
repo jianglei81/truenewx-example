@@ -6,7 +6,7 @@
 
 footer {
     border-top: 1px solid #dedede;
-    margin-top: 5px;
+    margin-top: 15px;
     padding-top: 15px;
 }
 
@@ -16,10 +16,34 @@ footer {
 
 .title {
     border-bottom: 1px solid #dedede;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin-top: 5px;
     margin-bottom: 20px;
 }
 
 .icon-blank {
     width: 14px;
+}
+
+.required {
+    position: static;
+}
+
+.field-error {
+    padding: 6px 10px;
+    margin: 0px 8px;
+}
+
+.field-error-hide {
+    padding: 6px 10px;
+    margin: 0px 8px;
+    display: none;
+}
+
+.breadcrumb {
+    border-bottom: 1px solid #dedede;
+    border-radius: 0px;
+    font-weight: bold;
+    margin-top: 1px;
 }

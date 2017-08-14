@@ -1,5 +1,8 @@
 package org.truenewx.example.service.manager;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.truenewx.data.orm.dao.UnityDao;
@@ -22,6 +25,11 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
     @Override
     protected UnityDao<Role, Integer> getDao() {
         return this.dao;
+    }
+
+    @Override
+    public List<Role> findAll() {
+        return this.dao.find((Map<String, ?>) null);
     }
 
 }
