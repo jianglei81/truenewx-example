@@ -60,9 +60,9 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
     }
 
     @Override
-    public QueryResult<Manager> findByKeyword(final String keyword, final int pageSize,
+    public QueryResult<Manager> findGeneral(final String keyword, final int pageSize,
             final int pageNo) {
-        return this.dao.findByKeyword(keyword, pageSize, pageNo);
+        return this.dao.findByKeywordAndTop(keyword, false, pageSize, pageNo);
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface ManagerService extends ModelUnityService<Manager, Integer> {
 
     Manager validateLogin(String username, String md5Password) throws BusinessException;
 
-    QueryResult<Manager> findByKeyword(String keyword, int pageSize, int pageNo);
+    QueryResult<Manager> findGeneral(String keyword, int pageSize, int pageNo);
 
     Manager updateFullname(int id, String fullname);
 

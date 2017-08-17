@@ -34,14 +34,18 @@ public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
     }
 
     @Override
-    public QueryResult<Manager> findByKeyword(final String keyword, final int pageSize,
-            final int pageNo) {
+    public QueryResult<Manager> findByKeywordAndTop(final String keyword, final Boolean top,
+            final int pageSize, final int pageNo) {
         final String entityName = getEntityName();
-        final StringBuffer hql = new StringBuffer("from ").append(entityName);
+        final StringBuffer hql = new StringBuffer("from ").append(entityName).append(" where 1=1");
         final Map<String, Object> params = new HashMap<>();
         if (StringUtils.isNotBlank(keyword)) {
-            hql.append(" where username like :keyword or fullname like :keyword");
+            hql.append(" and (username like :keyword or fullname like :keyword)");
             params.put("keyword", Strings.PERCENT + keyword + Strings.PERCENT);
+        }
+        if (top != null) {
+            hql.append(" and top=:top");
+            params.put("top", top);
         }
         final QueryParameterImpl parameter = new QueryParameterImpl(pageSize, pageNo);
         parameter.setOrder("username", Boolean.FALSE);

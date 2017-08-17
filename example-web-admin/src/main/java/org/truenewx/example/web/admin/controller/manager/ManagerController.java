@@ -45,7 +45,7 @@ public class ManagerController {
                     required = false,
                     defaultValue = "1") final int pageNo) {
         final ModelAndView mav = new ModelAndView("/manager/list");
-        final QueryResult<Manager> result = this.managerService.findByKeyword(keyword, pageSize,
+        final QueryResult<Manager> result = this.managerService.findGeneral(keyword, pageSize,
                 pageNo);
         mav.addObject("result", result);
         return mav;
