@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.truenewx.core.Strings;
 import org.truenewx.core.encrypt.Md5xEncrypter;
 import org.truenewx.core.exception.BusinessException;
 import org.truenewx.core.exception.HandleableException;
@@ -94,6 +95,7 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
             final SubmitManager model = (SubmitManager) submitModel;
             final Manager manager = new Manager();
             manager.setUsername(model.getUsername());
+            manager.setPassword(Strings.ASTERISK); // 密码暂时置为星号
             manager.setFullname(model.getFullname());
             manager.setCreateTime(new Date());
             applyRoles(manager, model.getRoleIds());
@@ -115,7 +117,7 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
                 final Role role = this.roleDao.find(roleId);
                 if (role != null) {
                     roles.add(role);
-    
+
                     final Collection<Manager> managers = role.getManagers();
                     if (!managers.contains(manager)) {
                         managers.add(manager);
@@ -132,7 +134,6 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
         if (submitModel instanceof SubmitManager) {
             final SubmitManager model = (SubmitManager) submitModel;
             final Manager manager = load(id);
-            manager.setUsername(model.getUsername());
             manager.setFullname(model.getFullname());
             applyRoles(manager, model.getRoleIds());
             this.dao.save(manager);

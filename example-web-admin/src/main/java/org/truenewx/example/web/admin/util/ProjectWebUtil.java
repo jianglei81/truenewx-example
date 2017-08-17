@@ -3,6 +3,7 @@ package org.truenewx.example.web.admin.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.truenewx.core.spring.util.SpringUtil;
 import org.truenewx.example.data.model.manager.Manager;
@@ -62,6 +63,11 @@ public class ProjectWebUtil {
     public static Menu getMenu() {
         final MenuAuthorizationInfo sai = getSubject().getAuthorization();
         return sai == null ? null : sai.getMenu();
+    }
+
+    public static String getPrevPrevUrl(final String defaultUrl) {
+        final String prev = SpringWebContext.getRequest().getParameter("prev");
+        return StringUtils.isBlank(prev) ? defaultUrl : prev;
     }
 
 }

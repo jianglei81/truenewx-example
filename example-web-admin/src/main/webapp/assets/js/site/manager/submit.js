@@ -12,6 +12,9 @@ site.manager.submit.Controller = site.Controller.extend({
                 event.preventDefault(); // 阻止提交
                 return false;
             }
+            var md5Password = hex_md5(password);
+            $("[name='password']").val(md5Password);
+            return true;
         });
     }
 });
