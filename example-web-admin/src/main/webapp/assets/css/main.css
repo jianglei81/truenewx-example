@@ -40,10 +40,3 @@ footer {
     margin: 0px 8px;
     display: none;
 }
-
-.breadcrumb {
-    border-bottom: 1px solid #dedede;
-    border-radius: 0px;
-    font-weight: bold;
-    margin-top: 1px;
-}

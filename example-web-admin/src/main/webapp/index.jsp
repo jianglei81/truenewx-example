@@ -7,7 +7,6 @@
 </head>
 
 <body>
-<h1 class="text-center col-md-10">欢迎进入后台管理中心</h1>
-<h1>&nbsp;</h1>
+<h1 class="text-center col-md-10" style="margin: 66px 0px;">欢迎进入后台管理中心</h1>
 </body>
 </html>

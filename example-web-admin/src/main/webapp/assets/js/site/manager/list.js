@@ -34,5 +34,18 @@ site.manager.list.Controller = site.Controller.extend({
                 site.success("重置密码成功");
             });
         }));
+    },
+    reverseDisabled : function(managerId, disabled) {
+        var rpc = $.tnx.rpc.imports("managerController");
+        var _this = this;
+        rpc.reverseDisabled(managerId, disabled, function(newDisabled) {
+            if (newDisabled) {
+                $("#iconDisable_" + managerId).addClass("hidden");
+                $("#iconEnable_" + managerId).removeClass("hidden");
+            } else {
+                $("#iconEnable_" + managerId).addClass("hidden");
+                $("#iconDisable_" + managerId).removeClass("hidden");
+            }
+        });
     }
 });

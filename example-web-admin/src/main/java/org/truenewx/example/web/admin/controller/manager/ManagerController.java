@@ -95,4 +95,10 @@ public class ManagerController {
         this.managerService.resetPassword(id, password);
     }
 
+    @RpcMethod
+    public boolean reverseDisabled(final int id, final boolean disabled) {
+        final Manager manager = this.managerService.reverseDisabled(id, disabled);
+        return manager == null ? !disabled : manager.isDisabled();
+    }
+
 }

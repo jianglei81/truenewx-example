@@ -158,4 +158,15 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
         return null;
     }
 
+    @Override
+    @WriteTransactional
+    public Manager reverseDisabled(final int id, final boolean disabled) {
+        final Manager manager = find(id);
+        if (manager != null) {
+            manager.setDisabled(!disabled);
+            this.dao.save(manager);
+        }
+        return manager;
+    }
+
 }

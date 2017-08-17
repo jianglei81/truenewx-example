@@ -41,7 +41,18 @@
             <tr>
                 <td>${manager.username}</td>
                 <td>${manager.fullname}</td>
-                <td class="text-center"><c:if test="${!manager.disabled}"><i class="icon icon-ok"></i></c:if></td>
+                <td class="text-center">
+                    <a<c:if test="${manager.disabled}"> class="hidden"</c:if> 
+                        id="iconDisable_${manager.id}" title="当前可用，点击禁用" render="tooltip"
+                        href="javascript:site.manager.list.controller.reverseDisabled(${manager.id}, false)">
+                        <i class="icon icon-ok"></i>
+                    </a>
+                    <a<c:if test="${!manager.disabled}"> class="hidden"</c:if> 
+                        id="iconEnable_${manager.id}" title="当前禁用，点击启用" render="tooltip" 
+                        href="javascript:site.manager.list.controller.reverseDisabled(${manager.id}, true)">
+                        <i class="icon icon-ban-circle"></i>
+                    </a>
+                </td>
                 <td class="text-center"><fmt:formatDate value="${manager.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>
                 <c:forEach var="role" items="${manager.roles}">
