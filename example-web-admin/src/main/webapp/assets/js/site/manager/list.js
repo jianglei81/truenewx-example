@@ -1,0 +1,38 @@
+$.tnx.namespace("site.manager.list");
+
+site.manager.list.Controller = site.Controller.extend({
+    onLoad : function() {
+    },
+    toResetPassword : function(id) {
+        var url = site.path.context + "/manager/" + id + "/password.win";
+        site.open(url, site.getOpenDialogButtons(function() {
+            var passwordObj = $("#password", this);
+            var password = passwordObj.val();
+            if (password == "") {
+                passwordObj.focus();
+                return;
+            }
+
+            var password2Obj = $("#password2", this);
+            var password2 = password2Obj.val();
+            if (password2 == "") {
+                password2Obj.focus();
+                return;
+            }
+
+            if (password != password2) {
+                $("#formError", this).removeClass("hidden");
+                return;
+            }
+
+            var managerId = parseInt($("#managerId").val());
+            var md5Password = hex_md5(password);
+            var rpc = $.tnx.rpc.imports("managerController");
+            var _this = this;
+            rpc.resetPassword(managerId, md5Password, function() {
+                _this.close();
+                site.success("重置密码成功");
+            });
+        }));
+    }
+});

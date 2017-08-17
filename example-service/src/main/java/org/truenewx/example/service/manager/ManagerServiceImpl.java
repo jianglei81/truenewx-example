@@ -9,6 +9,7 @@ import org.truenewx.core.Strings;
 import org.truenewx.core.encrypt.Md5xEncrypter;
 import org.truenewx.core.exception.BusinessException;
 import org.truenewx.core.exception.HandleableException;
+import org.truenewx.core.spring.transaction.annotation.WriteTransactional;
 import org.truenewx.data.model.SubmitModel;
 import org.truenewx.data.orm.dao.UnityDao;
 import org.truenewx.data.query.QueryResult;
@@ -90,11 +91,27 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
     }
 
     @Override
+    @WriteTransactional
+    public Manager resetPassword(final int id, final String newMd5Password) {
+        final Manager manager = find(id);
+        if (manager != null) {
+            manager.setPassword(this.encrypter.encryptByMd5Source(newMd5Password, manager.getId()));
+            this.dao.save(manager);
+        }
+        return manager;
+    }
+
+    @Override
     public Manager add(final SubmitModel<Manager> submitModel) throws HandleableException {
         if (submitModel instanceof SubmitManager) {
             final SubmitManager model = (SubmitManager) submitModel;
+            final String username = model.getUsername();
+            if (this.dao.countByUsername(username) > 0) {
+                throw new BusinessException(ManagerExceptionCodes.REPEAT_USERNAME, username)
+                        .bind("username");
+            }
             final Manager manager = new Manager();
-            manager.setUsername(model.getUsername());
+            manager.setUsername(username);
             manager.setPassword(Strings.ASTERISK); // 密码暂时置为星号
             manager.setFullname(model.getFullname());
             manager.setCreateTime(new Date());

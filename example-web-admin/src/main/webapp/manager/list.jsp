@@ -8,7 +8,7 @@
 <title>管理员清单</title>
 </head>
 
-<body>
+<body script="manager/list.js">
 <form class="form-horizontal">
     <div class="form-group">
         <label class="col-md-1" for="keyword">关键字</label>
@@ -52,7 +52,7 @@
                 </c:if>
                 </td>
                 <td class="text-center">
-                    <a href="${context}/manager/${manager.id}/reset-password">重置密码</a> |
+                    <a href="javascript:site.manager.list.controller.toResetPassword(${manager.id});">重置密码</a> |
                     <a href="${context}/manager/${manager.id}/update">修改</a>
                 </td>
             </tr>

@@ -12,6 +12,8 @@ import org.truenewx.example.data.model.manager.Manager;
  */
 public interface ManagerDao extends UnityDao<Manager, Integer> {
 
+    int countByUsername(String username);
+
     Manager findByUsername(String username);
 
     QueryResult<Manager> findByKeyword(String keyword, int pageSize, int pageNo);

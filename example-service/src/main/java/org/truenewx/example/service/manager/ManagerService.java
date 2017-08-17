@@ -22,4 +22,6 @@ public interface ManagerService extends ModelUnityService<Manager, Integer> {
     Manager updatePassword(int id, String oldMd5Password, String newMd5Password)
             throws BusinessException;
 
+    Manager resetPassword(int id, String newMd5Password);
+
 }

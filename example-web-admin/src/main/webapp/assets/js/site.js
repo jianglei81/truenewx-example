@@ -32,7 +32,9 @@ $.extend(site, {
         $.tnx.alert(message, title, callback);
     },
     flash : function(message, timeout, callback) {
-        var content = $("<div></div>").html(message);
+        var content = $("<h3></h3>").css({
+            margin : "10px"
+        }).html(message);
         $.tnx.flash(content, timeout, callback);
     },
     success : function(message, title, callback) {
@@ -44,7 +46,7 @@ $.extend(site, {
         if (typeof title == "string") {
             title = $("<strong></strong>").addClass("text-success").text(title);
         }
-        message = $("<div></div>").html(message);
+        message = $("<div></div>").addClass("text-success").html(message);
         $.tnx.alert(message, title, callback);
     },
     error : function(message, title, callback) {

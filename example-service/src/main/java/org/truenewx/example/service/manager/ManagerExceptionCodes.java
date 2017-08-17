@@ -21,4 +21,9 @@ public class ManagerExceptionCodes {
      */
     public static final String DISABLED_MANAGER = "error.manager.disabled_manager";
 
+    /**
+     * 用户名重复
+     */
+    public static final String REPEAT_USERNAME = "error.manager.repeat_username";
+
 }

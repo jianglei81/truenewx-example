@@ -3,7 +3,6 @@ package org.truenewx.example.web.admin.controller.manager;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +16,8 @@ import org.truenewx.example.service.manager.ManagerService;
 import org.truenewx.example.service.manager.RoleService;
 import org.truenewx.example.service.model.SubmitManager;
 import org.truenewx.example.web.admin.util.ProjectWebUtil;
+import org.truenewx.web.rpc.server.annotation.RpcController;
+import org.truenewx.web.rpc.server.annotation.RpcMethod;
 import org.truenewx.web.validation.generate.annotation.ValidationGeneratable;
 
 /**
@@ -25,7 +26,7 @@ import org.truenewx.web.validation.generate.annotation.ValidationGeneratable;
  * @author jianglei
  * @since JDK 1.8
  */
-@Controller
+@RpcController
 @RequestMapping("/manager")
 public class ManagerController {
 
@@ -75,10 +76,23 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
-    public String add(@PathVariable("id") final int id, final SubmitManager model)
+    public String update(@PathVariable("id") final int id, final SubmitManager model)
             throws HandleableException {
         this.managerService.update(id, model);
         return "redirect:" + ProjectWebUtil.getPrevPrevUrl("/manager/list");
+    }
+
+    @RequestMapping(value = "/{id}/password", method = RequestMethod.GET)
+    @ValidationGeneratable(Manager.class)
+    public ModelAndView toPassword(@PathVariable("id") final int id) {
+        final ModelAndView mav = new ModelAndView("/manager/password");
+        mav.addObject("id", id);
+        return mav;
+    }
+
+    @RpcMethod
+    public void resetPassword(final int id, final String password) {
+        this.managerService.resetPassword(id, password);
     }
 
 }

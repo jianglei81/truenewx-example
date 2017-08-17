@@ -7,7 +7,7 @@
 <title>添加管理员</title>
 </head>
 
-<body component="validate" script="manager/submit.js">
+<body component="validate,md5" script="manager/submit.js">
 <form class="form-horizontal" role="form" action="${context}/manager/add" method="post" validate="true">
     <div class="form-group">
         <label class="col-md-2 control-label" for="username">用户名</label>
