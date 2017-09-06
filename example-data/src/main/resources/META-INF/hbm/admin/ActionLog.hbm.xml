@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 4.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="org.truenewx.example.data.model.misc.ActionLog" table="T_ACTION_LOG">
+        <id name="id" type="java.lang.Long" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="manager" column="manager_id"
+            class="org.truenewx.example.data.model.manager.Manager" not-null="true" />
+        <property name="createTime" column="create_time" type="timestamp" not-null="true" />
+        <property name="action" column="action_string" length="4000" not-null="true"
+            type="org.truenewx.support.log.data.usertype.ActionJsonMapType" />
+    </class>
+
+</hibernate-mapping>

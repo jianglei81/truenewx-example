@@ -16,6 +16,7 @@ import org.truenewx.example.service.manager.ManagerService;
 import org.truenewx.example.service.manager.RoleService;
 import org.truenewx.example.service.model.SubmitManager;
 import org.truenewx.example.web.admin.util.ProjectWebUtil;
+import org.truenewx.support.log.web.annotation.LogExcluded;
 import org.truenewx.web.rpc.server.annotation.RpcController;
 import org.truenewx.web.rpc.server.annotation.RpcMethod;
 import org.truenewx.web.validation.generate.annotation.ValidationGeneratable;
@@ -60,6 +61,7 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @LogExcluded(parameters = { "password", "prev" })
     public String add(final SubmitManager model, final HttpServletRequest request)
             throws HandleableException {
         this.managerService.add(model);
@@ -76,6 +78,7 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    @LogExcluded(parameters = { "prev" })
     public String update(@PathVariable("id") final int id, final SubmitManager model)
             throws HandleableException {
         this.managerService.update(id, model);

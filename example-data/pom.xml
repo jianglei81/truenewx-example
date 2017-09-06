@@ -18,6 +18,11 @@
             <artifactId>truenewx-test</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.truenewx.support.log</groupId>
+            <artifactId>support-log-data</artifactId>
+            <version>${truenewx-support.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.truenewx.example</groupId>
             <artifactId>example-config</artifactId>
             <version>${project.parent.version}</version>

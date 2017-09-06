@@ -49,7 +49,7 @@ public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
         }
         final QueryParameterImpl parameter = new QueryParameterImpl(pageSize, pageNo);
         parameter.setOrder("username", Boolean.FALSE);
-        return pagingQuery(entityName, hql, params, parameter);
+        return query(entityName, hql, params, parameter);
     }
 
 }

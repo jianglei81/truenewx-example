@@ -16,7 +16,11 @@
         <dependency>
             <groupId>org.truenewx</groupId>
             <artifactId>truenewx-test</artifactId>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.truenewx.support.log</groupId>
+            <artifactId>support-log-service</artifactId>
+            <version>${truenewx-support.version}</version>
         </dependency>
         <dependency>
             <groupId>org.truenewx.example</groupId>

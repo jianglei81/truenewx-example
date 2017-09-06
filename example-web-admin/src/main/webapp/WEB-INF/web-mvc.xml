@@ -54,7 +54,28 @@
             <property name="menuResolver" ref="menuResolver" />
         </bean>
         <ref bean="validationGenerateInterceptor" />
+        <ref bean="actionLogInterceptor" />
     </mvc:interceptors>
+
+    <bean id="actionLogInterceptor" class="org.truenewx.example.web.admin.interceptor.ActionLogInterceptor">
+        <property name="excludedUrlPatterns">
+            <array>
+                <value>/assets/**</value>
+                <value>/login</value>
+                <value>/index</value>
+                <value>/logout</value>
+                <value>*.txt</value>
+                <value>/mine/**</value>
+                <value>/**/add;GET</value>
+                <value>/**/update;GET</value>
+            </array>
+        </property>
+        <property name="excludedRpcPatterns">
+            <array>
+                <value>mineController.*</value>
+            </array>
+        </property>
+    </bean>
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="contentNegotiationManager">
