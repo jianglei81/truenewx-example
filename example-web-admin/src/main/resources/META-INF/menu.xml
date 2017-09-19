@@ -28,7 +28,10 @@
                 <rpc id="managerController" method="reverseDisabled" />
             </operation>
         </item>
-        <item caption="操作日志" href="/log/action/list" role="top" icon="icon-list-ul" />
+        <item caption="操作日志" href="/log/action" role="top" icon="icon-list-ul" />
+        <item caption="系统日志" href="/log/system" role="top" icon="icon-bars">
+            <link href="/log/system/*" />
+        </item>
     </item>
 
     <item caption="用户管理" href="/user/list" permission="USER_LIST" icon="icon-user">

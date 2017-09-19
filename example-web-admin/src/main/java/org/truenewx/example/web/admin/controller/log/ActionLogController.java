@@ -24,9 +24,9 @@ public class ActionLogController {
     @Autowired
     private ActionLogService service;
 
-    @RequestMapping("/list")
+    @RequestMapping
     @LogExcluded
-    public ModelAndView list(
+    public ModelAndView execute(
             @RequestParam(value = "managerKeyword", required = false) final String managerKeyword,
             @RequestParam(value = "beginDate", required = false) final String beginDate,
             @RequestParam(value = "endDate", required = false) final String endDate,
@@ -36,7 +36,7 @@ public class ActionLogController {
             @RequestParam(value = "pageNo",
                     required = false,
                     defaultValue = "1") final int pageNo) {
-        final ModelAndView mav = new ModelAndView("/log/action/list");
+        final ModelAndView mav = new ModelAndView("/log/action");
         final Date beginTime = DateUtil.parseShort(beginDate);
         final Date endTime = DateUtil.parseShort(endDate);
         mav.addObject("result",

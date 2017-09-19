@@ -17,7 +17,9 @@ public class RoleController {
     @RequestMapping("/list")
     public ModelAndView list() {
         final ModelAndView mav = new ModelAndView("/role/list");
-
+        if (mav.hasView()) {
+            throw new NullPointerException();
+        }
         return mav;
     }
 

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<title>操作日志清单</title>
+<title>操作日志</title>
 </head>
 
 <body>
