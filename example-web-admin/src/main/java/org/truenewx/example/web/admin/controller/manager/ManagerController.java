@@ -1,7 +1,5 @@
 package org.truenewx.example.web.admin.controller.manager;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,8 +60,7 @@ public class ManagerController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @LogExcluded(parameters = { "password", "prev" })
-    public String add(final SubmitManager model, final HttpServletRequest request)
-            throws HandleableException {
+    public String add(final SubmitManager model) throws HandleableException {
         this.managerService.add(model);
         return "redirect:" + ProjectWebUtil.getPrevPrevUrl("/manager/list");
     }

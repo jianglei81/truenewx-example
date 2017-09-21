@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.truenewx.data.orm.dao.support.hibernate.HibernateUnityDaoSupport;
 import org.truenewx.data.query.QueryOrder;
@@ -25,7 +26,7 @@ public class ActionLogDaoImpl extends HibernateUnityDaoSupport<ActionLog, Long>
             final Date endTime, final int pageSize, final int pageNo, final QueryOrder order) {
         final StringBuffer hql = new StringBuffer("from ActionLog where 1=1");
         final Map<String, Object> params = new HashMap<>();
-        if (managerKeyword != null) {
+        if (StringUtils.isNotBlank(managerKeyword)) {
             hql.append(" and (manager.username like :managerKeyword")
                     .append(" or manager.fullname like :managerKeyword)");
             params.put("managerKeyword", managerKeyword);

@@ -26,6 +26,10 @@ footer {
     width: 14px;
 }
 
+.icon-blank:before {
+    content: " ";
+}
+
 .required {
     position: static;
 }
@@ -46,6 +50,14 @@ footer {
     border-bottom: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     padding: 10px;
+}
+
+.pointer, label[for]:hover, [href]:hover, [onclick]:hover, [rendered='tooltip']:hover {
+    cursor: pointer;
+}
+
+.tree .checkbox {
+    padding-top: 1px;
 }
 
 #logContainer pre {

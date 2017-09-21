@@ -26,4 +26,9 @@ public class ManagerExceptionCodes {
      */
     public static final String REPEAT_USERNAME = "error.manager.repeat_username";
 
+    /**
+     * 角色名称重复
+     */
+    public static final String ROLE_REPEAT_NAME = "error.manager.role.repeat_name";
+
 }

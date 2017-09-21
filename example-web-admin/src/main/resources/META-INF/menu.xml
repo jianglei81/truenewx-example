@@ -12,6 +12,9 @@
             <operation caption="删除角色" role="top">
                 <link href="/role/*/delete" />
             </operation>
+            <operation caption="调整排序" role="top">
+                <rpc id="roleController" method="move" />
+            </operation>
         </item>
         <item caption="管理员管理" href="/manager/list" role="top" icon="icon-group">
             <operation caption="添加管理员" role="top">

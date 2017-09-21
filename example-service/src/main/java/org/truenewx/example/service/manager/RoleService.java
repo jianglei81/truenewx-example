@@ -2,8 +2,9 @@ package org.truenewx.example.service.manager;
 
 import java.util.List;
 
+import org.truenewx.core.exception.BusinessException;
 import org.truenewx.example.data.model.manager.Role;
-import org.truenewx.service.unity.SimpleUnityService;
+import org.truenewx.service.unity.ModelUnityService;
 
 /**
  * 角色服务
@@ -11,8 +12,14 @@ import org.truenewx.service.unity.SimpleUnityService;
  * @author jianglei
  * @since JDK 1.8
  */
-public interface RoleService extends SimpleUnityService<Role, Integer> {
+public interface RoleService extends ModelUnityService<Role, Integer> {
 
     List<Role> findAll();
+
+    List<Role> findByName(String name);
+
+    void validateName(String name, Integer id) throws BusinessException;
+
+    Role move(int id, boolean down);
 
 }
