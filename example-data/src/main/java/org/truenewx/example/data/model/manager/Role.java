@@ -10,7 +10,7 @@ import org.truenewx.data.model.CloneableForSession;
  * @since JDK 1.8
  */
 @Caption("角色")
-public class Role extends AbstractRole implements CloneableForSession<Role> {
+public class Role extends AbstractRole implements CloneableForSession<Role>, Comparable<Role> {
 
     @Override
     public Role cloneForSession() {
@@ -21,6 +21,11 @@ public class Role extends AbstractRole implements CloneableForSession<Role> {
         role.setOrdinal(getOrdinal());
         role.setPermissions(getPermissions());
         return role;
+    }
+
+    @Override
+    public int compareTo(final Role other) {
+        return Long.valueOf(getOrdinal()).compareTo(other.getOrdinal());
     }
 
 }

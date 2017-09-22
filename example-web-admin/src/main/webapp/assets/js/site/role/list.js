@@ -39,5 +39,23 @@ site.role.list.Controller = site.Controller.extend({
         } else { // 没有则隐藏下移按钮
             $(".icon-arrow-down", tr).parent().css("visibility", "hidden");
         }
+    },
+    toDelete : function(id) {
+        $.tnx.rpc.imports("roleController", function(rpc) {
+            rpc.countManagers(id, function(count) {
+                var message = "";
+                if (count) {
+                    message = "该角色下包含" + count + "个管理员，如果删除该角色，这些管理员将解除与该角色的关系。<br/>";
+                }
+                message += "是否确认删除该角色？";
+                site.confirm(message, function(yes) {
+                    if (yes) {
+                        rpc.del(id, function() {
+                            $("tr[data-id='" + id + "']").remove();
+                        });
+                    }
+                });
+            });
+        });
     }
 });

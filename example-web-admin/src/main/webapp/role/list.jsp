@@ -58,7 +58,7 @@
                 <td>${role.remark}</td>
                 <td class="text-center">
                     <a href="${context}/role/${role.id}/update">修改</a> |
-                    <a href="${context}/role/${role.id}/delete">删除</a>
+                    <a href="javascript:site.role.list.controller.toDelete(${role.id})">删除</a>
                 </td>
             </tr>
         </c:forEach>

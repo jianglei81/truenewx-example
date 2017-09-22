@@ -13,11 +13,11 @@
         <property name="permissions" column="permission_string" not-null="false">
             <type name="org.truenewx.hibernate.usertype.SetJsonMapType" />
         </property>
-        <set name="managers" table="T_MANAGER_R_ROLE">
+        <set name="managers" table="T_MANAGER_R_ROLE" sort="natural" inverse="true">
             <key>
-                <column name="role_id"/>
+                <column name="role_id" />
             </key>
-            <many-to-many column="manager_id" class="org.truenewx.example.data.model.manager.Manager"/>
-         </set>
+            <many-to-many column="manager_id" class="org.truenewx.example.data.model.manager.Manager" />
+        </set>
     </class>
 </hibernate-mapping>

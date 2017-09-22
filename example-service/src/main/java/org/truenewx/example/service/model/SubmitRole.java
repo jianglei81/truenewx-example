@@ -14,6 +14,7 @@ public class SubmitRole implements SubmitModel<Role> {
     private String name;
     private String remark;
     private String[] permissions;
+    private int[] managerIds;
 
     public String getName() {
         return this.name;
@@ -38,4 +39,13 @@ public class SubmitRole implements SubmitModel<Role> {
     public void setPermissions(final String[] permissions) {
         this.permissions = permissions;
     }
+
+    public int[] getManagerIds() {
+        return this.managerIds;
+    }
+
+    public void setManagerIds(final int[] managerIds) {
+        this.managerIds = managerIds;
+    }
+
 }

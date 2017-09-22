@@ -169,4 +169,9 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
         return manager;
     }
 
+    @Override
+    public int countOfRole(final int roleId) {
+        return this.dao.countByRoleId(roleId);
+    }
+
 }

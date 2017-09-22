@@ -1,9 +1,12 @@
 package org.truenewx.example.service.manager;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.truenewx.core.exception.BusinessException;
@@ -11,8 +14,11 @@ import org.truenewx.core.exception.HandleableException;
 import org.truenewx.core.spring.transaction.annotation.WriteTransactional;
 import org.truenewx.core.util.CollectionUtil;
 import org.truenewx.data.model.SubmitModel;
+import org.truenewx.data.model.unity.UnityUtil;
 import org.truenewx.data.orm.dao.UnityDao;
+import org.truenewx.example.data.dao.manager.ManagerDao;
 import org.truenewx.example.data.dao.manager.RoleDao;
+import org.truenewx.example.data.model.manager.Manager;
 import org.truenewx.example.data.model.manager.Role;
 import org.truenewx.example.service.model.SubmitRole;
 import org.truenewx.service.unity.AbstractUnityService;
@@ -28,6 +34,8 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
 
     @Autowired
     private RoleDao dao;
+    @Autowired
+    private ManagerDao managerDao;
 
     @Override
     protected UnityDao<Role, Integer> getDao() {
@@ -71,6 +79,29 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
             final Set<String> permissions = new HashSet<>();
             CollectionUtil.addAll(permissions, model.getPermissions());
             role.setPermissions(permissions);
+            final Collection<Manager> managers = role.getManagers();
+            final int[] newManagerIds = model.getManagerIds();
+            // 原管理员在新管理员中没有的，说明被移除了
+            managers.removeIf(new Predicate<Manager>() {
+                @Override
+                public boolean test(final Manager manager) {
+                    final boolean removing = !ArrayUtils.contains(newManagerIds, manager.getId());
+                    if (removing) {
+                        manager.getRoles().remove(role);
+                    }
+                    return removing;
+                }
+            });
+            // 此时管理员清单中现存的均为已包含在新管理员中的，需要添加新加的管理员
+            for (final int managerId : newManagerIds) {
+                if (!UnityUtil.containsId(managers, managerId)) { // 加入原本没有的管理员
+                    final Manager manager = this.managerDao.find(managerId);
+                    if (manager != null) {
+                        managers.add(manager);
+                        manager.getRoles().add(role);
+                    }
+                }
+            }
             this.dao.save(role);
             return role;
         }
@@ -98,6 +129,21 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
             }
         }
         return role;
+    }
+
+    @Override
+    public void delete(final Integer id) throws HandleableException {
+        final Role role = find(id);
+        if (role != null) {
+            // 移除包含的管理员关系
+            final Collection<Manager> managers = role.getManagers();
+            for (final Manager manager : managers) {
+                manager.getRoles().remove(role);
+            }
+            managers.clear();
+
+            this.dao.delete(role);
+        }
     }
 
 }

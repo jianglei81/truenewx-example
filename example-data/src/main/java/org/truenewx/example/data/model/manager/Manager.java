@@ -10,7 +10,8 @@ import org.truenewx.data.model.CloneableForSession;
  * @since JDK 1.8
  */
 @Caption("管理员")
-public class Manager extends AbstractManager implements CloneableForSession<Manager> {
+public class Manager extends AbstractManager
+        implements CloneableForSession<Manager>, Comparable<Manager> {
 
     @Override
     public Manager cloneForSession() {
@@ -26,6 +27,11 @@ public class Manager extends AbstractManager implements CloneableForSession<Mana
             manager.getRoles().add(role.cloneForSession());
         }
         return manager;
+    }
+
+    @Override
+    public int compareTo(final Manager other) {
+        return getUsername().compareTo(other.getUsername());
     }
 
 }

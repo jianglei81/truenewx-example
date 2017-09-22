@@ -32,6 +32,17 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 control-label">包含管理员</label>
+        <div class="col-md-9">
+            <p class="form-control-static" id="managers">
+            <c:forEach var="manager" items="${managers.records}">
+                <span onclick="site.role.submit.controller.toggleManager(${manager.id})"
+                    class="label" data-id="${manager.id}">${manager.username} (${manager.fullname})</span>
+            </c:forEach>
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-3">
             <input type="hidden" name="prev" value="<tnx:prev-url context="false" default=""/>" />
             <button type="submit" class="btn btn-primary">确定</button>

@@ -18,4 +18,6 @@ public interface ManagerDao extends UnityDao<Manager, Integer> {
 
     QueryResult<Manager> findByKeywordAndTop(String keyword, Boolean top, int pageSize, int pageNo);
 
+    int countByRoleId(int roleId);
+
 }

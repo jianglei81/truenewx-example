@@ -11,6 +11,7 @@ import org.truenewx.core.Strings;
 import org.truenewx.core.exception.BusinessException;
 import org.truenewx.core.exception.HandleableException;
 import org.truenewx.example.data.model.manager.Role;
+import org.truenewx.example.service.manager.ManagerService;
 import org.truenewx.example.service.manager.RoleService;
 import org.truenewx.example.service.model.SubmitRole;
 import org.truenewx.example.web.admin.util.ProjectWebUtil;
@@ -35,26 +36,30 @@ import org.truenewx.web.validation.generate.annotation.ValidationGeneratable;
 public class RoleController {
 
     @Autowired
-    private RoleService service;
+    private RoleService roleService;
+    @Autowired
+    private ManagerService managerService;
     @Autowired
     private MenuResolver menuResolver;
 
     @RequestMapping("/list")
     public ModelAndView list(@RequestParam(value = "name", required = false) final String name) {
         final ModelAndView mav = new ModelAndView("/role/list");
-        mav.addObject("roles", this.service.findByName(name));
+        mav.addObject("roles", this.roleService.findByName(name));
         return mav;
     }
 
     @RpcMethod
     public void move(final int id, final boolean down) {
-        this.service.move(id, down);
+        this.roleService.move(id, down);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ValidationGeneratable(Role.class)
-    public String toAdd() {
-        return "/role/add";
+    public ModelAndView toAdd() {
+        final ModelAndView mav = new ModelAndView("/role/add");
+        mav.addObject("managers", this.managerService.findGeneral(null, 20, 1));
+        return mav;
     }
 
     @RpcMethod(
@@ -73,12 +78,12 @@ public class RoleController {
     @RpcMethod
     @LogExcluded
     public void validateName(final String name, final Integer id) throws BusinessException {
-        this.service.validateName(name, id);
+        this.roleService.validateName(name, id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(final SubmitRole model) throws HandleableException {
-        this.service.add(model);
+        this.roleService.add(model);
         return "redirect:" + ProjectWebUtil.getPrevPrevUrl("/role/list");
     }
 
@@ -86,17 +91,28 @@ public class RoleController {
     @ValidationGeneratable(Role.class)
     public ModelAndView toUpdate(@PathVariable("id") final int id) throws BusinessException {
         final ModelAndView mav = new ModelAndView("/role/update");
-        final Role role = this.service.load(id);
+        final Role role = this.roleService.load(id);
         mav.addObject("role", role);
         mav.addObject("permissions", StringUtils.join(role.getPermissions(), Strings.COMMA));
+        mav.addObject("managers", this.managerService.findGeneral(null, 20, 1));
         return mav;
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String update(@PathVariable("id") final int id, final SubmitRole model)
             throws HandleableException {
-        this.service.update(id, model);
+        this.roleService.update(id, model);
         return "redirect:" + ProjectWebUtil.getPrevPrevUrl("/role/list");
+    }
+
+    @RpcMethod
+    public int countManagers(final int id) {
+        return this.managerService.countOfRole(id);
+    }
+
+    @RpcMethod
+    public void del(final int id) throws HandleableException {
+        this.roleService.delete(id);
     }
 
 }

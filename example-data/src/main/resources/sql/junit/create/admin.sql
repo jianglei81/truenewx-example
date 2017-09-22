@@ -19,13 +19,13 @@ CREATE TABLE T_ROLE (
 
 
 CREATE TABLE T_MANAGER_R_ROLE (
- manager_id INT NOT NULL,
- role_id INT NOT NULL,
-
- PRIMARY KEY (manager_id,role_id),
-
- FOREIGN KEY (manager_id) REFERENCES T_MANAGER (id),
- FOREIGN KEY (role_id) REFERENCES T_ROLE (id)
+  manager_id int NOT NULL,
+  role_id int NOT NULL,
+  PRIMARY KEY (manager_id, role_id),
+  KEY idx_role_id (role_id),
+  KEY idx_manager_id (manager_id),
+  FOREIGN KEY (manager_id) REFERENCES t_manager (id),
+  FOREIGN KEY (role_id) REFERENCES t_role (id) ON DELETE CASCADE
 );
 
 CREATE TABLE T_ACTION_LOG (

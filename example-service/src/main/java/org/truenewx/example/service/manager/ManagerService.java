@@ -26,4 +26,6 @@ public interface ManagerService extends ModelUnityService<Manager, Integer> {
 
     Manager reverseDisabled(int id, boolean disabled);
 
+    int countOfRole(int roleId);
+
 }

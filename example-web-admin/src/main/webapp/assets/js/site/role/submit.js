@@ -26,6 +26,8 @@ site.role.submit.Controller = site.Controller.extend({
                 });
             }
         });
+
+        this.selectManagers();
     },
     loadMenuItems : function() {
         var _this = this;
@@ -97,5 +99,19 @@ site.role.submit.Controller = site.Controller.extend({
             return undefined; // 没有权限限定，且没有子级，则无效
         }
         return node;
+    },
+    toggleManager : function(managerId) {
+        var label = $("#managers [data-id='" + managerId + "']").toggleClass("label-primary");
+        if (label.hasClass("label-primary")) {
+            $("form").append('<input type="hidden" name="managerIds" value="' + managerId + '"/>');
+        } else {
+            $("input[name='managerIds'][value='" + managerId + "']").remove();
+        }
+    },
+    selectManagers : function() {
+        $("input[name='managerIds']").each(function(index, inputObj) {
+            var managerId = $(inputObj).val();
+            $("#managers [data-id='" + managerId + "']").addClass("label-primary");
+        });
     }
 });
