@@ -1,5 +1,6 @@
 package org.truenewx.example.service.manager;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
@@ -130,13 +131,11 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
         final Collection<Role> roles = manager.getRoles();
         roles.clear();
         if (roleIds != null) {
-            for (final int roleId : roleIds) {
-                final Role role = this.roleDao.find(roleId);
-                if (role != null) {
-                    roles.add(role);
-                    role.getManagers().add(manager);
-                }
-            }
+            Arrays.stream(roleIds).mapToObj(roleId -> this.roleDao.find(roleId))
+                    .filter(role -> role != null).forEach(role -> {
+                        roles.add(role);
+                        role.getManagers().add(manager);
+                    });
         }
     }
 
