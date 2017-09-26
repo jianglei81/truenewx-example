@@ -56,15 +56,16 @@
                 <td class="text-center"><fmt:formatDate value="${manager.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>
                 <c:forEach var="role" items="${manager.roles}">
-                    <span class="label label-primary">${role.name}</span>
+                    <a href="${context}/role/${role.id}/update">
+                        <span class="label label-warning">${role.name}</span></a>
                 </c:forEach>
                 <c:if test="${empty manager.roles}">
                     <span class="text-muted">&lt;尚未分配角色&gt;</span>
                 </c:if>
                 </td>
                 <td class="text-center">
-                    <a href="javascript:site.manager.list.controller.toResetPassword(${manager.id});">重置密码</a> |
-                    <a href="${context}/manager/${manager.id}/update">修改</a>
+                    <a href="${context}/manager/${manager.id}/update">修改</a> |
+                    <a href="javascript:site.manager.list.controller.toResetPassword(${manager.id});">重置密码</a>
                 </td>
             </tr>
         </c:forEach>

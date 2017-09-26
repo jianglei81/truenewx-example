@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.truenewx.core.Strings;
 import org.truenewx.core.exception.BusinessException;
 import org.truenewx.core.exception.HandleableException;
+import org.truenewx.data.query.Paging;
+import org.truenewx.data.query.QueryResult;
+import org.truenewx.example.data.model.manager.Manager;
 import org.truenewx.example.data.model.manager.Role;
 import org.truenewx.example.service.manager.ManagerService;
 import org.truenewx.example.service.manager.RoleService;
@@ -58,7 +61,7 @@ public class RoleController {
     @ValidationGeneratable(Role.class)
     public ModelAndView toAdd() {
         final ModelAndView mav = new ModelAndView("/role/add");
-        mav.addObject("managers", this.managerService.findGeneral(null, 20, 1));
+        mav.addObject("selectableManagers", this.managerService.findGeneral(null, 20, 1));
         return mav;
     }
 
@@ -81,6 +84,17 @@ public class RoleController {
         this.roleService.validateName(name, id);
     }
 
+    @RpcMethod(result = @RpcResult(filter = {
+            @RpcResultFilter(type = Manager.class, includes = { "id", "username", "fullname" }),
+            @RpcResultFilter(type = Paging.class, includes = { "morePage", "pageNo" }) }))
+    public QueryResult<Manager> getSelectableManagers(final int pageNo, final Integer roleId) {
+        if (roleId == null) {
+            return this.managerService.findGeneral(null, 20, pageNo);
+        } else {
+            return this.managerService.findGeneralOutOfRole(roleId, 20, pageNo);
+        }
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(final SubmitRole model) throws HandleableException {
         this.roleService.add(model);
@@ -94,7 +108,7 @@ public class RoleController {
         final Role role = this.roleService.load(id);
         mav.addObject("role", role);
         mav.addObject("permissions", StringUtils.join(role.getPermissions(), Strings.COMMA));
-        mav.addObject("managers", this.managerService.findGeneral(null, 20, 1));
+        mav.addObject("selectableManagers", this.managerService.findGeneralOutOfRole(id, 20, 1));
         return mav;
     }
 

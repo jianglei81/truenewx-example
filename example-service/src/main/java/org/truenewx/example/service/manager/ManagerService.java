@@ -28,4 +28,6 @@ public interface ManagerService extends ModelUnityService<Manager, Integer> {
 
     int countOfRole(int roleId);
 
+    QueryResult<Manager> findGeneralOutOfRole(int exceptedRoleId, int pageSize, int pageNo);
+
 }

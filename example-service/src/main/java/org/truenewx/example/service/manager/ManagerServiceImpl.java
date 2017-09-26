@@ -62,7 +62,7 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
     @Override
     public QueryResult<Manager> findGeneral(final String keyword, final int pageSize,
             final int pageNo) {
-        return this.dao.findByKeywordAndTop(keyword, false, pageSize, pageNo);
+        return this.dao.queryByKeywordAndTop(keyword, false, pageSize, pageNo);
     }
 
     @Override
@@ -134,12 +134,7 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
                 final Role role = this.roleDao.find(roleId);
                 if (role != null) {
                     roles.add(role);
-
-                    final Collection<Manager> managers = role.getManagers();
-                    if (!managers.contains(manager)) {
-                        managers.add(manager);
-                        this.roleDao.save(role);
-                    }
+                    role.getManagers().add(manager);
                 }
             }
         }
@@ -172,6 +167,12 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
     @Override
     public int countOfRole(final int roleId) {
         return this.dao.countByRoleId(roleId);
+    }
+
+    @Override
+    public QueryResult<Manager> findGeneralOutOfRole(final int exceptedRoleId, final int pageSize,
+            final int pageNo) {
+        return this.dao.queryExceptRoleIdByTop(exceptedRoleId, false, pageSize, pageNo);
     }
 
 }

@@ -10,6 +10,7 @@ import org.truenewx.core.Strings;
 import org.truenewx.data.orm.dao.support.hibernate.HibernateUnityDaoSupport;
 import org.truenewx.data.query.QueryParameterImpl;
 import org.truenewx.data.query.QueryResult;
+import org.truenewx.data.query.SingleQueryOrder;
 import org.truenewx.example.data.model.manager.Manager;
 
 /**
@@ -35,7 +36,7 @@ public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
     }
 
     @Override
-    public QueryResult<Manager> findByKeywordAndTop(final String keyword, final Boolean top,
+    public QueryResult<Manager> queryByKeywordAndTop(final String keyword, final Boolean top,
             final int pageSize, final int pageNo) {
         final String entityName = getEntityName();
         final StringBuffer hql = new StringBuffer("from ").append(entityName).append(" where 1=1");
@@ -60,6 +61,21 @@ public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
         query.setInteger("roleId", roleId);
         final Number count = (Number) query.uniqueResult();
         return count.intValue();
+    }
+
+    @Override
+    public QueryResult<Manager> queryExceptRoleIdByTop(final int exceptedRoleId, final Boolean top,
+            final int pageSize, final int pageNo) {
+        final StringBuffer hql = new StringBuffer("from Manager m where m.id not in ").append(
+                "(select r.manager.id from ManagerRoleRelation r where r.role.id=:exceptedRoleId)");
+        final Map<String, Object> params = new HashMap<>();
+        params.put("exceptedRoleId", exceptedRoleId);
+        if (top != null) {
+            hql.append(" and top=:top");
+            params.put("top", top);
+        }
+        return query(getEntityName(), hql, params, pageSize, pageNo,
+                new SingleQueryOrder("m.username", Boolean.FALSE));
     }
 
 }

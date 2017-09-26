@@ -52,7 +52,8 @@
                     <span class="text-muted">&lt;无&gt;</span>
                 </c:if>
                 <c:forEach var="manager" items="${role.managers}">
-                    <a href="${context}/manager/${manager.id}/update">${manager.fullname}</a>
+                    <a href="${context}/manager/${manager.id}/update">
+                        <span class="label label-primary">${manager.fullname}</span></a>
                 </c:forEach>
                 </td>
                 <td>${role.remark}</td>

@@ -1,8 +1,8 @@
 package org.truenewx.example.data.model.manager;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.truenewx.data.model.unity.AbstractUnity;
@@ -42,7 +42,7 @@ public abstract class AbstractRole extends AbstractUnity<Integer> {
     /**
      * 管理员集
      */
-    private Collection<Manager> managers = new HashSet<>(0);
+    private Collection<Manager> managers = new TreeSet<>();
 
     public String getName() {
         return this.name;

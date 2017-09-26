@@ -22,6 +22,10 @@ public class SqlFileContentConverterTest extends JUnit4SpringContextTest {
     private FileContentConverter converter;
 
     @Test
+    public void testEmpty() {
+        // 空的测试方法，用于占位，以免本类在单元测试时报错，下面的测试方法只是利用单元测试环境的工具方法
+    }
+
     @Caption("工具：转换自动生成的sql文件中不合适的部分语句为合适的语句")
     public void testConvert() {
         final String dir = "file://E:/workspace/example/example-data";

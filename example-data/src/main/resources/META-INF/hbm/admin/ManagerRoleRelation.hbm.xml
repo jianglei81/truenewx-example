@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 4.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="org.truenewx.example.data.model.manager.ManagerRoleRelation" table="T_MANAGER_R_ROLE">
+        <composite-id>
+            <key-many-to-one name="manager" column="manager_id"
+                class="org.truenewx.example.data.model.manager.Manager" />
+            <key-many-to-one name="role" column="role_id"
+                class="org.truenewx.example.data.model.manager.Role" />
+        </composite-id>
+    </class>
+
+</hibernate-mapping>

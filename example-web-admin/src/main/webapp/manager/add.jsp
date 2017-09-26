@@ -39,16 +39,15 @@
         <div id="fullnameError" class="alert alert-danger col-md-3 field-error-hide"></div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">角色</label>
+        <label class="col-md-2 control-label">所属角色</label>
         <div class="col-md-9">
-        <c:forEach var="role" items="${roles}">
-            <label class="checkbox-inline">
-                <input type="checkbox" name="roldIds" value="${role.id}"/> ${role.name}
-            </label>
-        </c:forEach>
-        <c:if test="${empty roles}">
-            <p class="form-control-static">系统中还没有角色，可<a href="${context}/role/add">点此添加角色</a></p>
-        </c:if>
+            <p class="form-control-static" id="roles">
+            <c:forEach var="role" items="${roles}">
+                <span onclick="site.manager.submit.controller.toggleRole(this)"
+                    class="label" data-id="${role.id}">${role.name}</span>
+            </c:forEach>
+                <c:if test="${empty roles}">系统中还没有角色，可<a href="${context}/role/add">点此添加角色</a></c:if>
+            </p>
         </div>
     </div>
     <div class="form-group">

@@ -100,7 +100,8 @@ site.role.submit.Controller = site.Controller.extend({
         }
         return node;
     },
-    toggleManager : function(managerId) {
+    toggleManager : function(obj) {
+        var managerId = $(obj).attr("data-id");
         var label = $("#managers [data-id='" + managerId + "']").toggleClass("label-primary");
         if (label.hasClass("label-primary")) {
             $("form").append('<input type="hidden" name="managerIds" value="' + managerId + '"/>');
@@ -113,5 +114,27 @@ site.role.submit.Controller = site.Controller.extend({
             var managerId = $(inputObj).val();
             $("#managers [data-id='" + managerId + "']").addClass("label-primary");
         });
+    },
+    loadMoreManager : function(roleId) {
+        var pageNoObj = $("#managers [page-no]");
+        var pageNo = parseInt(pageNoObj.attr("page-no"));
+        if (pageNo++) {
+            $.tnx.rpc.imports("roleController", function(rpc) {
+                rpc.getSelectableManagers(pageNo, roleId, function(result) {
+                    result.records.each(function(manager) {
+                        var span = '<span'
+                                + ' onclick="site.role.submit.controller.toggleManager(this)"'
+                                + ' class="label" data-id="' + manager.id + '">' + manager.username
+                                + ' (' + manager.fullname + ')' + '</span>\n';
+                        pageNoObj.before(span);
+                    });
+                    if (result.paging.morePage) {
+                        pageNoObj.attr("page-no", pageNo);
+                    } else {
+                        pageNoObj.remove();
+                    }
+                });
+            });
+        }
     }
 });

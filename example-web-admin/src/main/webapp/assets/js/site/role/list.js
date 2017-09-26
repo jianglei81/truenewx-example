@@ -41,6 +41,7 @@ site.role.list.Controller = site.Controller.extend({
         }
     },
     toDelete : function(id) {
+        var _this = this;
         $.tnx.rpc.imports("roleController", function(rpc) {
             rpc.countManagers(id, function(count) {
                 var message = "";
@@ -51,7 +52,12 @@ site.role.list.Controller = site.Controller.extend({
                 site.confirm(message, function(yes) {
                     if (yes) {
                         rpc.del(id, function() {
-                            $("tr[data-id='" + id + "']").remove();
+                            var tr = $("tr[data-id='" + id + "']");
+                            var prev = tr.prev();
+                            var next = tr.next();
+                            tr.remove();
+                            _this.resetMoveButtons(prev);
+                            _this.resetMoveButtons(next);
                         });
                     }
                 });

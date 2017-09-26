@@ -37,13 +37,19 @@
         <label class="col-md-2 control-label">包含管理员</label>
         <div class="col-md-9">
             <p class="form-control-static" id="managers">
-            <c:forEach var="manager" items="${managers.records}">
-                <span onclick="site.role.submit.controller.toggleManager(${manager.id})"
+            <c:forEach var="manager" items="${role.managers}">
+                <span onclick="site.role.submit.controller.toggleManager(this)"
                     class="label" data-id="${manager.id}">${manager.username} (${manager.fullname})</span>
             </c:forEach>
-            <c:if test="${managers.paging.morePage}">
-                <a href="javascript:site.role.submit.controller.loadMoreManager()" 
-                    page-no="${managers.paging.pageNo}">更多</a>
+            <c:if test="${not empty role.managers}"><br/></c:if>
+            <c:forEach var="manager" items="${selectableManagers.records}">
+                <span onclick="site.role.submit.controller.toggleManager(this)"
+                    class="label" data-id="${manager.id}">${manager.username} (${manager.fullname})</span>
+            </c:forEach>
+            <c:if test="${selectableManagers.paging.total == 0}">系统中还没有普通管理员，可<a href="${context}/manager/add">点此添加普通管理员</a></c:if>
+            <c:if test="${selectableManagers.paging.morePage}">
+                <a href="javascript:site.role.submit.controller.loadMoreManager(${role.id})" 
+                    page-no="${selectableManagers.paging.pageNo}">更多</a>
             </c:if>
             </p>
         </div>

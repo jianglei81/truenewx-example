@@ -60,6 +60,14 @@ footer {
     padding-top: 1px;
 }
 
+.label {
+    font-size: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 #logContainer pre {
     padding: 5px 8px;
     margin-bottom: 1px;

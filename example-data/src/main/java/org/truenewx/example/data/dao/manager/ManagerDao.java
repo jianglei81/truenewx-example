@@ -16,8 +16,10 @@ public interface ManagerDao extends UnityDao<Manager, Integer> {
 
     Manager findByUsername(String username);
 
-    QueryResult<Manager> findByKeywordAndTop(String keyword, Boolean top, int pageSize, int pageNo);
+    QueryResult<Manager> queryByKeywordAndTop(String keyword, Boolean top, int pageSize, int pageNo);
 
     int countByRoleId(int roleId);
+
+    QueryResult<Manager> queryExceptRoleIdByTop(int exceptedRoleId, Boolean top, int pageSize, int pageNo);
 
 }
