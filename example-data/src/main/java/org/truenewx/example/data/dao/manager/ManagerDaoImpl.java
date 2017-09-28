@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 import org.truenewx.core.Strings;
 import org.truenewx.data.orm.dao.support.hibernate.HibernateUnityDaoSupport;
@@ -56,11 +55,8 @@ public class ManagerDaoImpl extends HibernateUnityDaoSupport<Manager, Integer>
 
     @Override
     public int countByRoleId(final int roleId) {
-        final String sql = "select count(*) from T_MANAGER_R_ROLE where role_id = :roleId";
-        final SQLQuery query = getHibernateTemplate().getSession().createSQLQuery(sql);
-        query.setInteger("roleId", roleId);
-        final Number count = (Number) query.uniqueResult();
-        return count.intValue();
+        final String hql = "select count(*) from ManagerRoleRelation r where r.role.id = :roleId";
+        return getHibernateTemplate().count(hql, "roleId", roleId);
     }
 
     @Override
