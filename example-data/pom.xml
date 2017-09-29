@@ -43,9 +43,5 @@
             <groupId>com.atomikos</groupId>
             <artifactId>transactions-jta</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-        </dependency>
     </dependencies>
 </project>
