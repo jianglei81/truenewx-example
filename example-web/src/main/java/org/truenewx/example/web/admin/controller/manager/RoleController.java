@@ -21,7 +21,6 @@ import org.truenewx.example.web.admin.util.ProjectWebUtil;
 import org.truenewx.support.log.web.annotation.LogExcluded;
 import org.truenewx.web.menu.MenuResolver;
 import org.truenewx.web.menu.model.MenuItem;
-import org.truenewx.web.menu.model.MenuOperation;
 import org.truenewx.web.rpc.server.annotation.RpcController;
 import org.truenewx.web.rpc.server.annotation.RpcMethod;
 import org.truenewx.web.rpc.server.annotation.RpcResult;
@@ -65,21 +64,13 @@ public class RoleController {
         return mav;
     }
 
-    @RpcMethod(
-            result = @RpcResult(
-                    filter = {
-                            @RpcResultFilter(type = MenuItem.class,
-                                    includes = { "caption", "role", "permission", "subs",
-                                            "operations" }),
-                            @RpcResultFilter(type = MenuOperation.class,
-                                    includes = { "caption", "role", "permission" }) }))
-    @LogExcluded
+    @RpcMethod(result = @RpcResult(filter = @RpcResultFilter(type = MenuItem.class,
+            includes = { "caption", "role", "permission", "subs" })))
     public Iterable<MenuItem> getMenuItems() {
         return this.menuResolver.getFullMenu().getItems();
     }
 
     @RpcMethod
-    @LogExcluded
     public void validateName(final String name, final Integer id) throws BusinessException {
         this.roleService.validateName(name, id);
     }
@@ -87,6 +78,7 @@ public class RoleController {
     @RpcMethod(result = @RpcResult(filter = {
             @RpcResultFilter(type = Manager.class, includes = { "id", "username", "fullname" }),
             @RpcResultFilter(type = Paging.class, includes = { "morePage", "pageNo" }) }))
+    @LogExcluded
     public QueryResult<Manager> getSelectableManagers(final int pageNo, final Integer roleId) {
         if (roleId == null) {
             return this.managerService.findGeneral(null, 20, pageNo);

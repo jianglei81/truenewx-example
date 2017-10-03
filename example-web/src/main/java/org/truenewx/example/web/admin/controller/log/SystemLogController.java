@@ -21,7 +21,6 @@ import org.truenewx.core.spring.core.io.WebContextResource;
 import org.truenewx.core.util.DateUtil;
 import org.truenewx.support.log.data.model.SystemLogLine;
 import org.truenewx.support.log.service.SystemLogReader;
-import org.truenewx.support.log.web.annotation.LogExcluded;
 import org.truenewx.web.rpc.server.annotation.RpcController;
 import org.truenewx.web.rpc.server.annotation.RpcMethod;
 
@@ -98,7 +97,6 @@ public class SystemLogController {
     }
 
     @RpcMethod
-    @LogExcluded
     public List<SystemLogLine> getLast(final String appenderName, final int size) {
         final Appender appender = this.logger.getAppender(appenderName);
         if (appender instanceof ConsoleAppender) {
@@ -114,7 +112,6 @@ public class SystemLogController {
     }
 
     @RpcMethod
-    @LogExcluded
     public List<SystemLogLine> getAfter(final String appenderName, final long minPostion) {
         final Appender appender = this.logger.getAppender(appenderName);
         if (appender instanceof ConsoleAppender) {
@@ -130,7 +127,6 @@ public class SystemLogController {
     }
 
     @RpcMethod
-    @LogExcluded
     public List<SystemLogLine> getBefore(final String appenderName, final long maxPosition,
             final int size) {
         final Appender appender = this.logger.getAppender(appenderName);

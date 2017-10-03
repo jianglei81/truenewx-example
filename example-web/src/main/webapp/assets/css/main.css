@@ -68,6 +68,11 @@ a:hover {
     text-decoration: none;
 }
 
+td .alert {
+    margin: 5px 0px 0px 0px;
+    padding: 5px 8px;
+}
+
 #logContainer pre {
     padding: 5px 8px;
     margin-bottom: 1px;

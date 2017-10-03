@@ -13,9 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.truenewx.core.tuple.Binate;
 import org.truenewx.example.web.admin.util.ProjectWebUtil;
 import org.truenewx.web.menu.model.Menu;
-import org.truenewx.web.menu.model.MenuAction;
 import org.truenewx.web.menu.model.MenuItem;
-import org.truenewx.web.menu.model.MenuOperation;
 import org.truenewx.web.util.WebUtil;
 
 /**
@@ -35,16 +33,11 @@ public class BreadcrumbController {
         if (menu != null) {
             final HttpMethod method = HttpMethod.valueOf(request.getMethod());
             final String href = WebUtil.getRelativeRequestUrl(request);
-            final List<Binate<Integer, MenuAction>> indexes = menu.indexesOf(href, method);
+            final List<Binate<Integer, MenuItem>> indexes = menu.indexesOf(href, method);
             if (indexes != null) {
                 final List<MenuItem> items = new ArrayList<>();
-                for (final Binate<Integer, MenuAction> binate : indexes) {
-                    final MenuAction action = binate.getRight();
-                    if (action instanceof MenuItem) {
-                        items.add((MenuItem) action);
-                    } else if (action instanceof MenuOperation) {
-                        mav.addObject("operation", action);
-                    }
+                for (final Binate<Integer, MenuItem> binate : indexes) {
+                    items.add(binate.getRight());
                 }
                 mav.addObject("items", items);
             }

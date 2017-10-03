@@ -25,8 +25,8 @@
         <thead>
             <tr>
                 <th class="text-center">时间</th>
-                <th>管理员</th>
-                <th>名称</th>
+                <th nowrap="nowrap">管理员</th>
+                <th nowrap="nowrap">名称</th>
                 <th class="text-center">类型</th>
                 <th>内容</th>
             </tr>
@@ -34,9 +34,9 @@
         <tbody>
         <c:forEach var="log" items="${result.records}">
             <tr>
-                <td class="text-center"><fmt:formatDate value="${log.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td>${log.manager.username}</td>
-                <td>${log.action.caption}</td>
+                <td nowrap="nowrap" class="text-center"><fmt:formatDate value="${log.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td nowrap="nowrap">${log.manager.username}</td>
+                <td nowrap="nowrap">${log.action.caption}</td>
                 <td class="text-center">
                     <c:set var="labelType" value="${log.action.type == 'URL' ? 'primary' : 'warning'}"/>
                     <span class="label label-badge label-${labelType}">${log.action.type}</span>
@@ -44,7 +44,9 @@
                 <c:if test="${log.action.type == 'URL'}">
                     <span class="label label-info" title="请求方式" render="tooltip">${log.action.method}</span>
                     ${log.action.url}
-                    <span class="label" title="请求参数" render="tooltip">${log.action.params}</span>
+                <c:if test="${not empty log.action.params}">
+                    <div class="alert" title="请求参数" render="tooltip">${log.action.params}</div>
+                </c:if>
                 </c:if>
                 <c:if test="${log.action.type == 'RPC'}">
                     <c:set var="argString" value="${log.action.args} "/>

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.truenewx.core.tuple.Binate;
 import org.truenewx.example.web.admin.util.ProjectWebUtil;
 import org.truenewx.web.menu.model.Menu;
-import org.truenewx.web.menu.model.MenuAction;
+import org.truenewx.web.menu.model.MenuItem;
 import org.truenewx.web.util.WebUtil;
 
 /**
@@ -33,7 +33,7 @@ public class MenuController {
             mav.addObject("menu", menu);
             final HttpMethod method = HttpMethod.valueOf(request.getMethod());
             final String href = WebUtil.getRelativeRequestUrl(request);
-            final List<Binate<Integer, MenuAction>> indexes = menu.indexesOf(href, method);
+            final List<Binate<Integer, MenuItem>> indexes = menu.indexesOf(href, method);
             if (indexes != null) {
                 if (indexes.size() > 0) {
                     mav.addObject("level1ActiveIndex", indexes.get(0).getLeft());

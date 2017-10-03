@@ -34,7 +34,7 @@
         </profile>
     </profiles>
     <build>
-        <finalName>example-admin</finalName>
+        <finalName>example</finalName>
         <plugins>
             <plugin>
                 <groupId>com.juvenxu.portable-config-maven-plugin</groupId>
