@@ -61,7 +61,7 @@ public class ProjectWebUtil {
     }
 
     public static Menu getMenu() {
-        final MenuAuthorizationInfo sai = getSubject().getAuthorization();
+        final MenuAuthorizationInfo sai = getSubject().getAuthorization(false);
         return sai == null ? null : sai.getMenu();
     }
 
