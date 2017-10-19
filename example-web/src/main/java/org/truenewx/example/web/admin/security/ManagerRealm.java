@@ -57,6 +57,7 @@ public class ManagerRealm implements Realm<Manager> {
     @Override
     public AuthorizationInfo getAuthorizationInfo(final Manager manager) {
         final MenuAuthorizationInfo ai = new MenuAuthorizationInfo(true); // 需要缓存
+        ai.addPermission("COMMON");
         if (manager.isTop()) { // 顶级管理员使用特殊的顶级权限菜单
             ai.addRole("top");
         }

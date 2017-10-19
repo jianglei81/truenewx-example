@@ -1,7 +1,7 @@
 package org.truenewx.example.web.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,12 +34,15 @@ public class BreadcrumbController {
             final HttpMethod method = HttpMethod.valueOf(request.getMethod());
             final String href = WebUtil.getRelativeRequestUrl(request);
             final List<Binate<Integer, MenuItem>> indexes = menu.indexesOf(href, method);
-            if (indexes != null) {
-                final List<MenuItem> items = new ArrayList<>();
-                for (final Binate<Integer, MenuItem> binate : indexes) {
-                    items.add(binate.getRight());
+            if (indexes != null && indexes.size() > 0) {
+                if (indexes.stream().filter(binate -> {
+                    return binate.getRight().isHidden();
+                }).count() == 0) { // 索引路径中不能有一个是隐藏的，否则就不生成面包屑
+                    final List<MenuItem> items = indexes.stream().map(binate -> {
+                        return binate.getRight();
+                    }).collect(Collectors.toList());
+                    mav.addObject("items", items);
                 }
-                mav.addObject("items", items);
             }
         }
         return mav;

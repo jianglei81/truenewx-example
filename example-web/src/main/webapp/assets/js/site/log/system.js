@@ -53,19 +53,20 @@ site.log.system.Controller = site.Controller.extend({
     },
     loadLast : function() {
         var appender = this.getAppender();
-        var rpc = $.tnx.rpc.imports("systemLogController");
         var _this = this;
         var pre = $("#logContainer pre:last");
-        if (pre.length) { // 已有日志内容，则取最后一条之后的
-            var pos = parseInt(pre.attr("data-pos"));
-            rpc.getAfter(appender, pos, function(lines) {
-                _this.appendLines(lines);
-            });
-        } else { // 没有日志内容，则取最近的
-            rpc.getLast(appender, this.pageSize, function(lines) {
-                _this.appendLines(lines);
-            });
-        }
+        var rpc = $.tnx.rpc.imports("systemLogController", function(rpc) {
+            if (pre.length) { // 已有日志内容，则取最后一条之后的
+                var pos = parseInt(pre.attr("data-pos"));
+                rpc.getAfter(appender, pos, function(lines) {
+                    _this.appendLines(lines);
+                });
+            } else { // 没有日志内容，则取最近的
+                rpc.getLast(appender, _this.pageSize, function(lines) {
+                    _this.appendLines(lines);
+                });
+            }
+        });
     },
     getAppender : function() {
         return $("#appenders li.active a").text();
@@ -77,16 +78,18 @@ site.log.system.Controller = site.Controller.extend({
             var pos = parseInt(pre.attr("data-pos"));
             if (pos > 0) {
                 var appender = this.getAppender();
-                var rpc = $.tnx.rpc.imports("systemLogController");
-                rpc.getBefore(appender, pos, this.pageSize, function(lines) {
-                    lines.reverse(); // 反转清单以便于生成记录
-                    var scrollHeight = 0;
-                    lines.each(function(line) {
-                        var pre = $("<pre></pre>").attr("data-pos", line.pos).text(line.content);
-                        logContainer.prepend(pre);
-                        scrollHeight += pre.outerHeight(true);
+                $.tnx.rpc.imports("systemLogController", function(rpc) {
+                    rpc.getBefore(appender, pos, this.pageSize, function(lines) {
+                        lines.reverse(); // 反转清单以便于生成记录
+                        var scrollHeight = 0;
+                        lines.each(function(line) {
+                            var pre = $("<pre></pre>").attr("data-pos", line.pos)
+                                    .text(line.content);
+                            logContainer.prepend(pre);
+                            scrollHeight += pre.outerHeight(true);
+                        });
+                        logContainer[0].scrollTop = scrollHeight;
                     });
-                    logContainer[0].scrollTop = scrollHeight;
                 });
             }
         }

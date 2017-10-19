@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu name="admin" xmlns="http://www.truenewx.org/schema/menu">
 
+    <item caption="通用" permission="COMMON" hidden="true">
+        <link href="/index" />
+    </item>
+
     <item caption="系统管理" icon="icon-cogs">
         <item caption="角色管理" href="/role/list" role="top">
             <item caption="添加角色" role="top">
@@ -10,8 +14,8 @@
                 <link href="/role/*/update" />
             </item>
             <item caption="删除角色" role="top">
-                <rpc id="roleController" method="countManagers"/>
-                <rpc id="roleController" method="del"/>
+                <rpc id="roleController" method="countManagers" />
+                <rpc id="roleController" method="del" />
             </item>
             <item caption="调整排序" role="top">
                 <rpc id="roleController" method="move" />
@@ -35,6 +39,9 @@
         <item caption="操作日志" href="/log/action" role="top" icon="icon-list-ul" />
         <item caption="系统日志" href="/log/system" role="top" icon="icon-bars">
             <link href="/log/system/*" />
+            <rpc id="systemLogController" method="getLast" />
+            <rpc id="systemLogController" method="getAfter" />
+            <rpc id="systemLogController" method="getBefore" />
         </item>
     </item>
 

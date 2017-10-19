@@ -3,7 +3,7 @@
 <c:if test="${not empty items}">
 <h4 class="header-dividing" style="margin-top: 0px; padding-bottom: 6px;">
     <ol class="breadcrumb bottom-block">
-        <li><a href="${context}"><i class="icon icon-home"></i> 首页</a></li>
+        <li><a href="${context}/index"><i class="icon icon-home"></i> 首页</a></li>
     <c:forEach var="item" items="${items}">
         <li>
         <c:if test="${not empty item.link.href}">

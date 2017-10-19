@@ -67,7 +67,7 @@ public class RoleController {
     @RpcMethod(result = @RpcResult(filter = @RpcResultFilter(type = MenuItem.class,
             includes = { "caption", "role", "permission", "subs" })))
     public Iterable<MenuItem> getMenuItems() {
-        return this.menuResolver.getFullMenu().getItems();
+        return this.menuResolver.getFullMenu().getVisibleItems();
     }
 
     @RpcMethod
