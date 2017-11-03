@@ -8,8 +8,14 @@
 <title>个人资料</title>
 </head>
 
-<body width="360" script="mine/profile.js">
+<body component="upload" script="mine/profile.js" width="360">
 <form class="form-horizontal" role="form" method="get">
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="headImageUrl">头像</label>
+        <div class="col-md-8">
+            <input type="file" class="form-control" id="headImageUrl" name="headImageUrl" />
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-md-3 control-label">用户名</label>
         <div class="col-md-8">

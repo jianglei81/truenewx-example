@@ -13,9 +13,6 @@
         <dependent-module archiveName="truenewx-data-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/truenewx-data/truenewx-data">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="truenewx-core-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/truenewx-core/truenewx-core">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="support-log-web-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/support-log-web/support-log-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -23,6 +20,15 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="support-log-data-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/support-log-data/support-log-data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="support-unstructured-web-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/support-unstructured-web/support-unstructured-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="support-unstructured-core-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/support-unstructured-core/support-unstructured-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="truenewx-core-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/truenewx-core/truenewx-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="example-service-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/example-service/example-service">

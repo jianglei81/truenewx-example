@@ -20,7 +20,10 @@
         <dependency>
             <groupId>org.truenewx.support.log</groupId>
             <artifactId>support-log-service</artifactId>
-            <version>${truenewx-support.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.truenewx.support.unstructured</groupId>
+            <artifactId>support-unstructured-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.truenewx.example</groupId>

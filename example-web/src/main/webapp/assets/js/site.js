@@ -12,7 +12,9 @@ $.extend(site.components, {
     "md5" : site.path.resContext + "/vendor/core/md5-2.1.js",
     "input-limiter" : site.path.resContext + "/component/input-limiter/js/input-limiter.js",
     "ckeditor" : site.path.resContext + "/vendor/ckeditor/4.5.10/ckeditor.js",
-    "chart" : [ site.path.resContext + "/vendor/echarts/3.2.2/echarts.min.js" ]
+    "chart" : [ site.path.resContext + "/vendor/echarts/3.2.2/echarts.min.js" ],
+    "upload" : [ site.path.resContext + "/component/unstructured-upload"
+            + "/js/unstructured-upload.js" ]
 });
 
 $.extend(site, {

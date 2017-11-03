@@ -61,7 +61,10 @@
         <dependency>
             <groupId>org.truenewx.support.log</groupId>
             <artifactId>support-log-web</artifactId>
-            <version>${truenewx-support.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.truenewx.support.unstructured</groupId>
+            <artifactId>support-unstructured-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.truenewx.example</groupId>

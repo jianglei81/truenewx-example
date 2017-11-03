@@ -15,6 +15,19 @@ site.mine.profile.Controller = site.Controller.extend({
                 btnSave.addClass("hidden");
             }
         });
+
+        var headImage = $("#headImageUrl");
+        headImage.unstructuredUpload({
+            authorizeType : "MANAGER_HEAD_IMAGE",
+            auto : true,
+            callbackContext : this,
+            success : function() {
+                site.success("上传成功");
+            },
+            error : function(error) {
+                site.error(error.message);
+            }
+        });
     },
     updateFullname : function() {
         var fullnameObj = $("#fullname", this.win);

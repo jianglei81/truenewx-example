@@ -97,6 +97,26 @@
                 <version>3.0.0</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.truenewx.support.unstructured</groupId>
+                <artifactId>support-unstructured-core</artifactId>
+                <version>${truenewx-support.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.truenewx.support.unstructured</groupId>
+                <artifactId>support-unstructured-web</artifactId>
+                <version>${truenewx-support.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.truenewx.support.log</groupId>
+                <artifactId>support-log-service</artifactId>
+                <version>${truenewx-support.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.truenewx.support.log</groupId>
+                <artifactId>support-log-web</artifactId>
+                <version>${truenewx-support.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

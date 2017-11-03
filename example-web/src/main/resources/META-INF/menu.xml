@@ -3,6 +3,7 @@
 
     <item caption="通用" permission="COMMON" hidden="true">
         <link href="/index" />
+        <link href="/mine/*" />
     </item>
 
     <item caption="系统管理" icon="icon-cogs">
