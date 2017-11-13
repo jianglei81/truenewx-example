@@ -22,7 +22,7 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
 
     @Override
     public UnstructuredUploadLimit getUploadLimit(final Manager user) {
-        return new UnstructuredUploadLimit(1024 * 1024, "jpg", "png", "gif");
+        return new UnstructuredUploadLimit(1, 1024 * 1024, "jpg", "png", "gif");
     }
 
     @Override
