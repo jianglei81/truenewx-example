@@ -16,16 +16,27 @@ site.mine.profile.Controller = site.Controller.extend({
             }
         });
 
-        var headImage = $("#headImageUrl");
-        headImage.unstructuredUpload({
+        var btnHeadImage = $("#btnHeadImage");
+        btnHeadImage.unstructuredUpload({
             authorizeType : "MANAGER_HEAD_IMAGE",
-            auto : true,
             callbackContext : this,
-            success : function() {
-                site.success("上传成功");
+            serverPath : site.path.context + "/unstructured/upload",
+            auto : true,
+            events : {
+                uploadSuccess : function(file) {
+                    site.success(file.name + "上传成功");
+                },
+                uploadError : function(file) {
+                    site.error(file.name + "上传失败");
+                },
+                error : function(error) {
+                    site.error(error.message);
+                }
             },
-            error : function(error) {
-                site.error(error.message);
+            messages : {
+                "default" : {
+                    "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
+                }
             }
         });
     },

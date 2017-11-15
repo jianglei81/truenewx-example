@@ -9,11 +9,12 @@
 </head>
 
 <body component="upload" script="mine/profile.js" width="360">
+<link href="${resContext}/vendor/webuploader/0.1.5/css/webuploader.css" rel="stylesheet" type="text/css" />
 <form class="form-horizontal" role="form" method="get">
     <div class="form-group">
         <label class="col-md-3 control-label" for="headImageUrl">头像</label>
         <div class="col-md-8">
-            <input type="file" class="form-control" id="headImageUrl" name="headImageUrl" />
+            <div id="btnHeadImage">选择文件</div>
         </div>
     </div>
     <div class="form-group">
