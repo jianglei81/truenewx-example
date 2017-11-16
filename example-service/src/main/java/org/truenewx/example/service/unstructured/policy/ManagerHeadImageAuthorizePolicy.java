@@ -1,7 +1,8 @@
 package org.truenewx.example.service.unstructured.policy;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
-import org.truenewx.core.util.StringUtil;
+import org.truenewx.core.Strings;
 import org.truenewx.example.data.model.manager.Manager;
 import org.truenewx.example.service.model.UnstructuredAuthorizeType;
 import org.truenewx.support.unstructured.core.model.UnstructuredUploadLimit;
@@ -32,12 +33,12 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
 
     @Override
     public String getPath(final Manager manager, final String filename) {
-        return "/manager/" + manager.getId() + "/" + StringUtil.uuid32() + "-" + filename;
+        return "/manager/" + manager.getId() + Strings.DOT + FilenameUtils.getExtension(filename);
     }
 
     @Override
     public boolean isReadable(final Manager manager, final String path) {
-        return manager != null && path.startsWith("/manager/" + manager.getId() + "/");
+        return manager != null && path.startsWith("/manager/" + manager.getId() + Strings.DOT);
     }
 
     @Override
