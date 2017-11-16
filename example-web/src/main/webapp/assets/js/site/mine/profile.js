@@ -23,11 +23,14 @@ site.mine.profile.Controller = site.Controller.extend({
             serverPath : site.path.context + "/unstructured/upload",
             auto : true,
             events : {
-                uploadSuccess : function(file) {
-                    site.success(file.name + "上传成功");
-                },
                 uploadError : function(file) {
                     site.error(file.name + "上传失败");
+                },
+                uploadAccept : function(block, results) {
+                    results.each(function(result) {
+                        site.success(result.filename + " 上传成功\nstorageUrl=" + result.storageUrl
+                                + "\nreadUrl=" + result.readUrl);
+                    });
                 },
                 error : function(error) {
                     site.error(error.message);

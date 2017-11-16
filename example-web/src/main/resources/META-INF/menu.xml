@@ -4,7 +4,8 @@
     <item caption="通用" permission="COMMON" hidden="true">
         <link href="/index" />
         <link href="/mine/*" />
-        <rpc id="mineController" method="*"/>
+        <rpc id="mineController" method="*" />
+        <link href="/unstructured/upload/*" />
     </item>
 
     <item caption="系统管理" icon="icon-cogs">
