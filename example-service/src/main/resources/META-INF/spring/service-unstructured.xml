@@ -6,7 +6,7 @@
 
     <bean id="unstructuredAuthorizer" class="org.truenewx.support.unstructured.core.local.LocalUnstructuredAuthorizer">
         <property name="host" value="" /><!-- 当前网站设置为空即可 -->
-        <property name="region" value="unstructured" />
+        <property name="region" value="unstructured/dl" />
     </bean>
 
     <bean id="unstructuredAccessor" class="org.truenewx.support.unstructured.core.local.LocalUnstructuredAccessor">

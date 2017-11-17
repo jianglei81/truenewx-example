@@ -47,6 +47,7 @@
                     <value>/logout*</value>
                     <value>/assets/*</value>
                     <value>/third/*</value>
+                    <value>/unstructured/dl/*</value>
                     <value>/*.txt</value>
                 </array>
             </property>

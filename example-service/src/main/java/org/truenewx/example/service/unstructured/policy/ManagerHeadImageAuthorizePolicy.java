@@ -33,12 +33,12 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
 
     @Override
     public String getPath(final Manager manager, final String filename) {
-        return "/manager/" + manager.getId() + Strings.DOT + FilenameUtils.getExtension(filename);
+        return "manager/" + manager.getId() + Strings.DOT + FilenameUtils.getExtension(filename);
     }
 
     @Override
     public boolean isReadable(final Manager manager, final String path) {
-        return manager != null && path.startsWith("/manager/" + manager.getId() + Strings.DOT);
+        return path.startsWith("manager/");
     }
 
     @Override
