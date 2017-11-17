@@ -12,9 +12,15 @@
         <item caption="角色管理" href="/role/list" role="top">
             <item caption="添加角色" role="top">
                 <link href="/role/add" />
+                <rpc id="roleController" method="getMenuItems" />
+                <rpc id="roleController" method="validateName" />
+                <rpc id="roleController" method="getSelectableManagers" />
             </item>
             <item caption="修改角色" role="top">
                 <link href="/role/*/update" />
+                <rpc id="roleController" method="getMenuItems" />
+                <rpc id="roleController" method="validateName" />
+                <rpc id="roleController" method="getSelectableManagers" />
             </item>
             <item caption="删除角色" role="top">
                 <rpc id="roleController" method="countManagers" />
