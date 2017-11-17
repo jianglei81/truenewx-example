@@ -37,6 +37,11 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
     }
 
     @Override
+    public boolean isPublicReadable() {
+        return true;
+    }
+
+    @Override
     public boolean isReadable(final Manager manager, final String path) {
         return path.startsWith("manager/");
     }
