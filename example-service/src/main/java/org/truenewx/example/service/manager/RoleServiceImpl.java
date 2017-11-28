@@ -90,13 +90,15 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
                 return removing;
             });
             // 此时管理员清单中现存的均为已包含在新管理员中的，需要添加新加的管理员
-            Arrays.stream(newManagerIds)
-                    .filter(managerId -> !UnityUtil.containsId(managers, managerId))
-                    .mapToObj(managerId -> this.managerDao.find(managerId))
-                    .filter(manager -> manager != null).forEach(manager -> {
-                        managers.add(manager);
-                        manager.getRoles().add(role);
-                    });
+            if (newManagerIds != null) {
+                Arrays.stream(newManagerIds)
+                        .filter(managerId -> !UnityUtil.containsId(managers, managerId))
+                        .mapToObj(managerId -> this.managerDao.find(managerId))
+                        .filter(manager -> manager != null).forEach(manager -> {
+                            managers.add(manager);
+                            manager.getRoles().add(role);
+                        });
+            }
             this.dao.save(role);
             return role;
         }

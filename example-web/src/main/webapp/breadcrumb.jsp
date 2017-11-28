@@ -6,9 +6,9 @@
         <li><a href="${context}/index"><i class="icon icon-home"></i> 首页</a></li>
     <c:forEach var="item" items="${items}">
         <li>
-        <c:if test="${not empty item.link.href}">
-            <a href="${context}${item.link.href}">${item.caption}</a>
-        </c:if><c:if test="${empty item.link.href}">${item.caption}</c:if>
+        <c:if test="${not empty item.action.link.href}">
+            <a href="${context}${item.action.link.href}">${item.caption}</a>
+        </c:if><c:if test="${empty item.action.link.href}">${item.caption}</c:if>
         </li>
     </c:forEach>
     <c:if test="${not empty operation}">

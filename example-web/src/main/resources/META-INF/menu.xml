@@ -1,66 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu name="admin" xmlns="http://www.truenewx.org/schema/menu">
-
-    <item caption="通用" permission="COMMON" hidden="true">
+    <anonymous>
+        <link href="/unstructured/dl/*" />
+        <rpc id="unstructuredController" method="get*" />
+    </anonymous>
+    <logined>
         <link href="/index" />
         <link href="/mine/*" />
         <rpc id="mineController" method="*" />
         <link href="/unstructured/upload/*" />
-    </item>
-
+    </logined>
     <item caption="系统管理" icon="icon-cogs">
-        <item caption="角色管理" href="/role/list" role="top">
-            <item caption="添加角色" role="top">
-                <link href="/role/add" />
-                <rpc id="roleController" method="getMenuItems" />
-                <rpc id="roleController" method="validateName" />
-                <rpc id="roleController" method="getSelectableManagers" />
+        <item caption="角色管理">
+            <action href="/role/list" role="top" />
+            <item caption="添加角色">
+                <action href="/role/add" role="top">
+                    <rpc id="roleController" method="getMenuItems" />
+                    <rpc id="roleController" method="validateName" />
+                    <rpc id="roleController" method="getSelectableManagers" />
+                </action>
             </item>
-            <item caption="修改角色" role="top">
-                <link href="/role/*/update" />
-                <rpc id="roleController" method="getMenuItems" />
-                <rpc id="roleController" method="validateName" />
-                <rpc id="roleController" method="getSelectableManagers" />
+            <item caption="修改角色">
+                <action href="/role/*/update" role="top">
+                    <rpc id="roleController" method="getMenuItems" />
+                    <rpc id="roleController" method="validateName" />
+                    <rpc id="roleController" method="getSelectableManagers" />
+                </action>
             </item>
-            <item caption="删除角色" role="top">
-                <rpc id="roleController" method="countManagers" />
-                <rpc id="roleController" method="del" />
+            <item caption="删除角色">
+                <action role="top">
+                    <rpc id="roleController" method="countManagers" />
+                    <rpc id="roleController" method="del" />
+                </action>
             </item>
-            <item caption="调整排序" role="top">
-                <rpc id="roleController" method="move" />
-            </item>
-        </item>
-        <item caption="管理员管理" href="/manager/list" role="top" icon="icon-group">
-            <item caption="添加管理员" role="top">
-                <link href="/manager/add" />
-            </item>
-            <item caption="修改管理员" role="top">
-                <link href="/manager/*/update" />
-            </item>
-            <item caption="重置密码" role="top">
-                <link href="/manager/*/password" />
-                <rpc id="managerController" method="resetPassword" />
-            </item>
-            <item caption="禁用/启用" role="top">
-                <rpc id="managerController" method="reverseDisabled" />
+            <item caption="调整排序">
+                <action role="top">
+                    <rpc id="roleController" method="move" />
+                </action>
             </item>
         </item>
-        <item caption="操作日志" href="/log/action" role="top" icon="icon-list-ul" />
-        <item caption="系统日志" href="/log/system" role="top" icon="icon-bars">
-            <link href="/log/system/*" />
-            <rpc id="systemLogController" method="getLast" />
-            <rpc id="systemLogController" method="getAfter" />
-            <rpc id="systemLogController" method="getBefore" />
+        <item caption="管理员管理" icon="icon-group">
+            <action href="/manager/list" role="top" />
+            <item caption="添加管理员">
+                <action href="/manager/add" role="top" />
+            </item>
+            <item caption="修改管理员">
+                <action href="/manager/*/update" role="top" />
+            </item>
+            <item caption="重置密码">
+                <action href="/manager/*/password" role="top">
+                    <rpc id="managerController" method="resetPassword" />
+                </action>
+            </item>
+            <item caption="禁用/启用">
+                <action role="top">
+                    <rpc id="managerController" method="reverseDisabled" />
+                </action>
+            </item>
+        </item>
+        <item caption="操作日志" icon="icon-list-ul">
+            <action href="/log/action" role="top" />
+        </item>
+        <item caption="系统日志" icon="icon-bars">
+            <action href="/log/system" role="top">
+                <link href="/log/system/*" />
+                <rpc id="systemLogController" method="getLast" />
+                <rpc id="systemLogController" method="getAfter" />
+                <rpc id="systemLogController" method="getBefore" />
+            </action>
         </item>
     </item>
-
-    <item caption="用户管理" href="/user/list" permission="USER_LIST" icon="icon-user">
-        <item caption="查看用户详情" permission="USER_DETAIL">
-            <link href="/user/*/detail" />
+    <item caption="用户管理" icon="icon-user">
+        <action href="/user/list" permission="USER_LIST" />
+        <item caption="查看用户详情">
+            <action permission="USER_DETAIL">
+                <link href="/user/*/detail" />
+            </action>
         </item>
-        <item caption="禁用/启用" permission="USER_DISABLE">
-            <rpc id="userController" method="reverseDisabled" />
+        <item caption="禁用/启用">
+            <action permission="USER_DISABLE">
+                <rpc id="userController" method="reverseDisabled" />
+            </action>
         </item>
     </item>
-
 </menu>

@@ -1,5 +1,7 @@
 package org.truenewx.example.web.admin.controller.manager;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,9 +67,9 @@ public class RoleController {
     }
 
     @RpcMethod(result = @RpcResult(filter = @RpcResultFilter(type = MenuItem.class,
-            includes = { "caption", "role", "permission", "subs" })))
-    public Iterable<MenuItem> getMenuItems() {
-        return this.menuResolver.getFullMenu().getVisibleItems();
+            includes = { "caption", "permission", "subs" })))
+    public List<MenuItem> getMenuItems() {
+        return this.menuResolver.getFullMenu().getItems();
     }
 
     @RpcMethod
