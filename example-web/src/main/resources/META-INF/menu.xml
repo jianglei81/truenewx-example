@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu name="admin" xmlns="http://www.truenewx.org/schema/menu">
     <anonymous>
-        <link href="/unstructured/dl/*" />
+        <link href="/unstructured/dl/**" />
         <rpc id="unstructuredController" method="get*" />
     </anonymous>
     <logined>
