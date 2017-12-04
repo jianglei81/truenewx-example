@@ -7,14 +7,15 @@
 <head>
 <title>个人资料</title>
 </head>
-
 <body component="upload" script="mine/profile.js" width="360">
-<link href="${resContext}/vendor/webuploader/0.1.5/css/webuploader.css" rel="stylesheet" type="text/css" />
+<link href="${resContext}/vendor/webuploader/0.1.7-alpha/css/webuploader.css" rel="stylesheet" type="text/css" />
 <form class="form-horizontal" role="form" method="get">
     <div class="form-group">
         <label class="col-md-3 control-label" for="headImageUrl">头像</label>
         <div class="col-md-8">
-            <div id="btnHeadImage">选择文件</div>
+            <div class="webuploader-wrap">
+                <div id="btnHeadImage">上传头像</div>
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -24,13 +25,21 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-3 control-label" for="headImageUrl">头像</label>
+        <div class="col-md-8">
+            <div class="second-wrap">
+                <div id="second">上传头像</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-3 control-label">顶级管理员</label>
         <div class="col-md-8">
             <p class="form-control-static">
                 <tnx:enumtext type="boolean" value="${manager.top}"/>
             </p>
         </div>
-    </div>
+    </div>  
     <div class="form-group">
         <label class="col-md-3 control-label">姓名</label>
         <div class="col-md-7">
@@ -41,7 +50,7 @@
                 href="javascript:site.mine.profile.controller.updateFullname()">
                 <i class="icon icon-save"></i></a>
         </div>
-    </div>
+    </div>    
     <div class="form-group">
         <label class="col-md-3 control-label">创建时间</label>
         <div class="col-md-8">
