@@ -36,6 +36,7 @@ public class UnstructuredController
 
     @Override
     @RpcMethod
+    @LogExcluded
     public UnstructuredUploadLimit getUploadLimit(final UnstructuredAuthorizeType authorizeType)
             throws BusinessException {
         return super.getUploadLimit(authorizeType);
@@ -43,6 +44,7 @@ public class UnstructuredController
 
     @Override
     @RpcMethod
+    @LogExcluded
     public String getReadUrl(final String storageUrl) throws BusinessException {
         return super.getReadUrl(storageUrl);
     }
