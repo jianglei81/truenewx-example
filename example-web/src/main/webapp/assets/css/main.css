@@ -1,3 +1,14 @@
+/* 通用 */
+html,body{
+    height: 100%;
+}
+
+.fullpage-container{
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 55px; 
+}
+
 .logo {
     padding-top: 10px;
     padding-bottom: 5px;
@@ -6,7 +17,7 @@
 
 footer {
     border-top: 1px solid #dedede;
-    margin-top: 15px;
+    margin-top: -50px;
     padding-top: 15px;
 }
 
