@@ -19,9 +19,4 @@ public abstract class ManagerUnstructuredAuthorizePolicy
         return UnstructuredProvider.OWN;
     }
 
-    @Override
-    public boolean isPublicReadable() {
-        return false;
-    }
-
 }

@@ -1,6 +1,5 @@
 package org.truenewx.example.service.unstructured.policy;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.truenewx.core.Strings;
 import org.truenewx.example.data.model.manager.Manager;
@@ -32,18 +31,18 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
     }
 
     @Override
-    public String getPath(final Manager manager, final String filename) {
-        return "manager/" + manager.getId() + Strings.DOT + FilenameUtils.getExtension(filename);
-    }
-
-    @Override
-    public boolean isPublicReadable() {
+    public boolean isMd5AsFilename() {
         return true;
     }
 
     @Override
+    public String getPath(final Manager manager, final String filename) {
+        return "manager/" + manager.getId() + Strings.SLASH + filename;
+    }
+
+    @Override
     public boolean isReadable(final Manager manager, final String path) {
-        return path.startsWith("manager/");
+        return manager != null && path.startsWith("manager/");
     }
 
     @Override
