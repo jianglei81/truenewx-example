@@ -13,6 +13,7 @@
     <div class="form-group">
         <label class="col-md-3 control-label" for="headImageUrl">头像</label>
         <div class="col-md-8">
+            <input type="hidden" id="headImageUrl" value="${manager.headImageUrl}">
             <div class="webuploader-wrap">
                 <div id="btnHeadImage">上传头像</div>
             </div>

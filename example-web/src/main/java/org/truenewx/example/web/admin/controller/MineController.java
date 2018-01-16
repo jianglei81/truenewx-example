@@ -32,6 +32,13 @@ public class MineController {
     }
 
     @RpcMethod
+    public void updateHeadImage(final String headImageUrl) {
+        final Manager manager = ProjectWebUtil.getManager();
+        this.managerService.updateHeadImageUrl(manager.getId(), headImageUrl);
+        manager.setHeadImageUrl(headImageUrl);
+    }
+
+    @RpcMethod
     public void updateFullname(final String fullname) {
         final Manager manager = ProjectWebUtil.getManager();
         this.managerService.updateFullname(manager.getId(), fullname);

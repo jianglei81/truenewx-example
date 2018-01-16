@@ -19,6 +19,7 @@ public class Manager extends AbstractManager
         manager.setId(getId());
         manager.setUsername(getUsername());
         manager.setPassword(getPassword());
+        manager.setHeadImageUrl(getHeadImageUrl());
         manager.setFullname(getFullname());
         manager.setTop(isTop());
         manager.setDisabled(isDisabled());

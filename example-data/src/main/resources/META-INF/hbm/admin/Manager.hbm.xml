@@ -9,6 +9,7 @@
         </id>
         <property name="username" type="string" column="username" not-null="true" length="20" />
         <property name="password" type="string" column="password" not-null="false" length="64" />
+        <property name="headImageUrl" type="string" column="head_image_url" not-null="false" length="80" />
         <property name="fullname" type="string" column="fullname" not-null="true" length="20" />
         <property name="top" type="boolean" column="top" not-null="true" />
         <property name="disabled" type="boolean" column="disabled" not-null="true" />

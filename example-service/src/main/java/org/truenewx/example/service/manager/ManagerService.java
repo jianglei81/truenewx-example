@@ -17,6 +17,8 @@ public interface ManagerService extends ModelUnityService<Manager, Integer> {
 
     QueryResult<Manager> findGeneral(String keyword, int pageSize, int pageNo);
 
+    Manager updateHeadImageUrl(int id, String headImageUrl);
+
     Manager updateFullname(int id, String fullname);
 
     Manager updatePassword(int id, String oldMd5Password, String newMd5Password)

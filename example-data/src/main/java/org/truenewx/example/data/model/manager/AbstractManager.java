@@ -31,6 +31,12 @@ public abstract class AbstractManager extends AbstractUnity<Integer> {
     private String password;
 
     /**
+     * 头像URL
+     */
+    @NotContainsSpecialChars
+    private String headImageUrl;
+
+    /**
      * 姓名
      */
     @NotBlank
@@ -71,6 +77,14 @@ public abstract class AbstractManager extends AbstractUnity<Integer> {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public String getHeadImageUrl() {
+        return this.headImageUrl;
+    }
+
+    public void setHeadImageUrl(final String headImageUrl) {
+        this.headImageUrl = headImageUrl;
     }
 
     public String getFullname() {

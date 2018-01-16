@@ -67,6 +67,16 @@ public class ManagerServiceImpl extends AbstractUnityService<Manager, Integer>
     }
 
     @Override
+    public Manager updateHeadImageUrl(final int id, final String headImageUrl) {
+        final Manager manager = find(id);
+        if (manager != null) {
+            manager.setHeadImageUrl(headImageUrl);
+            this.dao.save(manager);
+        }
+        return manager;
+    }
+
+    @Override
     public Manager updateFullname(final int id, final String fullname) {
         final Manager manager = find(id);
         if (manager != null) {
