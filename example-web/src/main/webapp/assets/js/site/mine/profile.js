@@ -24,7 +24,7 @@ site.mine.profile.Controller = site.Controller.extend({
             events : {
                 ready : function() {
                     var headImageUrl = $("#headImageUrl").val();
-                    btnHeadImage.unstructuredUpload("addFile", [ headImageUrl ], function(files) {
+                    btnHeadImage.unstructuredUpload("addFiles", [ headImageUrl ], function(files) {
                         $.each(files, function() {
                             var imageItem = '<div class="webuploader-item">'
                                     + '<img class="webuploader-res" id="' + this.id + '" '
@@ -51,13 +51,13 @@ site.mine.profile.Controller = site.Controller.extend({
                     if (updateId) {
                         $("#" + updateId).attr({
                             "id" : block.file.id,
-                            "src" : site.path.context + result.readUrl + "?v=" + Math.random(),
+                            "src" : result.readUrl + "?v=" + Math.random(),
                         });
                     } else { // 否则添加文件
                         var imageItem = '<div class="webuploader-item">'
                                 + '<img class="webuploader-res" id="' + block.file.id + '" '
-                                + 'src="' + site.path.context + result.readUrl + '?v='
-                                + Math.random() + '">' + '<div class="webuploader-headbar">'
+                                + 'src="' + result.readUrl + '?v=' + Math.random() + '">'
+                                + '<div class="webuploader-headbar">'
                                 + '<i class="icon icon-times"></i></div>' + '</div>'
                         btnHeadImage.parent().append(imageItem);
                         var $thisfile = $('#' + block.file.id)
@@ -95,7 +95,7 @@ site.mine.profile.Controller = site.Controller.extend({
         btnSave.html('<img src="' + site.path.context + '/assets/image/loading-32.gif"/>');
         var _this = this;
         fullnameObj.disable();
-        var rpc = $.tnx.rpc.imports("mineController", function(rpc) {
+        $.tnx.rpc.imports("mineController", function(rpc) {
             rpc.updateFullname(fullname, function() {
                 _this.fullname = fullname;
                 $("#managerName").text(fullname);
@@ -109,17 +109,13 @@ site.mine.profile.Controller = site.Controller.extend({
     },
     // 点选已存在文件，更新文件
     triggerBtn : function(el, $obj) {
-        var fileid = $(el).children().attr('id');
-        $obj.unstructuredUpload('updateFile', {
-            triggerFileid : fileid
-        })
+        var fileId = $(el).children().attr("id");
+        $obj.unstructuredUpload("updateFile", fileId);
     },
     // 删除当前文件
     removeThisFile : function(el, $obj) {
         window.event ? window.event.cancelBubble = true : el.stopPropagation(); // 阻止冒泡
-        var fileid = $(el).parents('.webuploader-item').find('.webuploader-res').attr('id');
-        $obj.unstructuredUpload('deleteFile', {
-            deleteFileid : fileid
-        })
+        var fileId = $(el).parents('.webuploader-item').find('.webuploader-res').attr('id');
+        $obj.unstructuredUpload("deleteFile", fileId);
     }
 });

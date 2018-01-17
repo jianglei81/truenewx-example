@@ -26,14 +26,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-3 control-label" for="headImageUrl">头像</label>
-        <div class="col-md-8">
-            <div class="second-wrap">
-                <div id="second">上传头像</div>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-3 control-label">顶级管理员</label>
         <div class="col-md-8">
             <p class="form-control-static">
