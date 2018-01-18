@@ -18,14 +18,13 @@ site.mine.profile.Controller = site.Controller.extend({
         var btnHeadImage = $("#btnHeadImage", _this.win);
         btnHeadImage.unstructuredUpload({
             authorizeType : "MANAGER_HEAD_IMAGE",
-            callbackContext : this,
             serverPath : site.path.context + "/unstructured/upload",
             auto : true,
             events : {
                 ready : function() {
                     var headImageUrl = $("#headImageUrl", _this.win).val();
                     if (headImageUrl) {
-                        btnHeadImage.unstructuredUpload("addFiles", [ headImageUrl ], function(
+                        btnHeadImage.unstructuredUpload("addFile", [ headImageUrl ], function(
                                 files) {
                             $.each(files, function(i, file) {
                                 _this.appendImage(file.id, file.url);
@@ -33,14 +32,14 @@ site.mine.profile.Controller = site.Controller.extend({
                         });
                     }
                 },
-                uploadError : function(file) {
-                    site.error(file.name + "上传失败");
+                uploadError : function(file, reason) {
+                    site.error(file.name + "上传失败，" + reason);
                 },
-                uploadAccept : function(block, results, updateId) {
+                uploadAccept : function(block, results, updatingFileId) {
                     var result = results[0]; // 只有一个图片
                     // 如果存在待更新文件id，则更新文件
-                    if (updateId) {
-                        $("#" + updateId).attr({
+                    if (updatingFileId) {
+                        $("#" + updatingFileId).attr({
                             "id" : block.file.id,
                             "src" : result.readUrl + "?v=" + Math.random(),
                         });
@@ -80,8 +79,13 @@ site.mine.profile.Controller = site.Controller.extend({
         // 注册文件移除事件
         $("i.icon", parent).click(function() {
             window.event ? window.event.cancelBubble = true : el.stopPropagation(); // 阻止冒泡
-            var deleteFileId = $(".webuploader-res", parent).attr("id");
-            btnHeadImage.unstructuredUpload("deleteFile", deleteFileId);
+            $.tnx.rpc.imports("mineController", function(rpc) {
+                rpc.updateHeadImage(null, function() {
+                    var removeFileId = $(".webuploader-res", parent).attr("id");
+                    btnHeadImage.unstructuredUpload("removeFile", removeFileId);
+                    $("#" + removeFileId).parents(".webuploader-item").remove();
+                });
+            });
         });
     },
     updateFullname : function() {
