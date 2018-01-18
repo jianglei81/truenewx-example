@@ -15,7 +15,7 @@ site.mine.profile.Controller = site.Controller.extend({
                 btnSave.addClass("hidden");
             }
         });
-        var btnHeadImage = $("#btnHeadImage");
+        var btnHeadImage = $("#btnHeadImage", _this.win);
         btnHeadImage.unstructuredUpload({
             authorizeType : "MANAGER_HEAD_IMAGE",
             callbackContext : this,
@@ -23,24 +23,15 @@ site.mine.profile.Controller = site.Controller.extend({
             auto : true,
             events : {
                 ready : function() {
-                    var headImageUrl = $("#headImageUrl").val();
-                    btnHeadImage.unstructuredUpload("addFiles", [ headImageUrl ], function(files) {
-                        $.each(files, function() {
-                            var imageItem = '<div class="webuploader-item">'
-                                    + '<img class="webuploader-res" id="' + this.id + '" '
-                                    + 'src="' + this.url + '?v=' + Math.random() + '">'
-                                    + '<div class="webuploader-headbar">'
-                                    + '<i class="icon icon-times"></i></div>' + '</div>'
-                            btnHeadImage.parent().append(imageItem);
-                            var $thisfile = $("#" + this.id);
-                            $thisfile.parent().click(function() {
-                                _this.triggerBtn(this, btnHeadImage);
-                            });
-                            $thisfile.parent().find("i.icon").click(function() {
-                                _this.removeThisFile(this, btnHeadImage);
+                    var headImageUrl = $("#headImageUrl", _this.win).val();
+                    if (headImageUrl) {
+                        btnHeadImage.unstructuredUpload("addFiles", [ headImageUrl ], function(
+                                files) {
+                            $.each(files, function(i, file) {
+                                _this.appendImage(file.id, file.url);
                             });
                         });
-                    });
+                    }
                 },
                 uploadError : function(file) {
                     site.error(file.name + "上传失败");
@@ -54,21 +45,9 @@ site.mine.profile.Controller = site.Controller.extend({
                             "src" : result.readUrl + "?v=" + Math.random(),
                         });
                     } else { // 否则添加文件
-                        var imageItem = '<div class="webuploader-item">'
-                                + '<img class="webuploader-res" id="' + block.file.id + '" '
-                                + 'src="' + result.readUrl + '?v=' + Math.random() + '">'
-                                + '<div class="webuploader-headbar">'
-                                + '<i class="icon icon-times"></i></div>' + '</div>'
-                        btnHeadImage.parent().append(imageItem);
-                        var $thisfile = $('#' + block.file.id)
-                        $thisfile.parent().click(function() {
-                            _this.triggerBtn(this, btnHeadImage);
-                        });
-                        $thisfile.parent().find('i.icon').click(function() {
-                            _this.removeThisFile(this, btnHeadImage);
-                        });
+                        _this.appendImage(block.file.id, result.readUrl);
                     }
-                    $("#headImageUrl", this.win).val(result.storageUrl);
+                    $("#headImageUrl", _this.win).val(result.storageUrl);
                     $.tnx.rpc.imports("mineController", function(rpc) {
                         rpc.updateHeadImage(result.storageUrl);
                     });
@@ -82,6 +61,27 @@ site.mine.profile.Controller = site.Controller.extend({
                     "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
                 }
             }
+        });
+    },
+    appendImage : function(fileId, fileUrl) {
+        var btnHeadImage = $("#btnHeadImage");
+        var imageItem = '<div class="webuploader-item">' + '<img class="webuploader-res" id="'
+                + fileId + '" ' + 'src="' + fileUrl + '?v=' + Math.random() + '">'
+                + '<div class="webuploader-headbar">' + '<i class="icon icon-times"></i></div>'
+                + '</div>'
+        btnHeadImage.parent().append(imageItem);
+        var parent = $("#" + fileId).parent();
+        var _this = this;
+        // 注册文件修改事件
+        parent.click(function() {
+            var updateFileId = $(".webuploader-res", parent).attr("id");
+            btnHeadImage.unstructuredUpload("updateFile", updateFileId);
+        });
+        // 注册文件移除事件
+        $("i.icon", parent).click(function() {
+            window.event ? window.event.cancelBubble = true : el.stopPropagation(); // 阻止冒泡
+            var deleteFileId = $(".webuploader-res", parent).attr("id");
+            btnHeadImage.unstructuredUpload("deleteFile", deleteFileId);
         });
     },
     updateFullname : function() {
@@ -106,16 +106,5 @@ site.mine.profile.Controller = site.Controller.extend({
                 }, 3000);
             });
         });
-    },
-    // 点选已存在文件，更新文件
-    triggerBtn : function(el, $obj) {
-        var fileId = $(el).children().attr("id");
-        $obj.unstructuredUpload("updateFile", fileId);
-    },
-    // 删除当前文件
-    removeThisFile : function(el, $obj) {
-        window.event ? window.event.cancelBubble = true : el.stopPropagation(); // 阻止冒泡
-        var fileId = $(el).parents('.webuploader-item').find('.webuploader-res').attr('id');
-        $obj.unstructuredUpload("deleteFile", fileId);
     }
 });
