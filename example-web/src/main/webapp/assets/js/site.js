@@ -13,6 +13,7 @@ $.extend(site.components, {
     "input-limiter" : site.path.resContext + "/component/input-limiter/js/input-limiter.js",
     "ckeditor" : site.path.resContext + "/vendor/ckeditor/4.5.10/ckeditor.js",
     "chart" : [ site.path.resContext + "/vendor/echarts/3.2.2/echarts.min.js" ],
+    "lazyload" : site.path.resContext + "/vendor/jquery/plugins/jquery.lazyload-1.9.3.min.js",
     "upload" : [ site.path.resContext + "/vendor/webuploader/0.1.7-alpha/js/webuploader.nolog.js",
             site.path.resContext + "/component/unstructured-upload/js/unstructured-upload.js" ]
 });

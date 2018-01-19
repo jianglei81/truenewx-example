@@ -7,7 +7,7 @@
 <head>
 <title>个人资料</title>
 </head>
-<body component="upload" script="mine/profile.js" width="360">
+<body component="upload,lazyload" script="mine/profile.js" width="360">
 <link href="${resContext}/vendor/webuploader/0.1.7-alpha/css/webuploader.css" rel="stylesheet" type="text/css" />
 <form class="form-horizontal" role="form" method="get">
     <div class="form-group">

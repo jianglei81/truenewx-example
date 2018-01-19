@@ -15,78 +15,107 @@ site.mine.profile.Controller = site.Controller.extend({
                 btnSave.addClass("hidden");
             }
         });
+        this.initHeadImageUpload();
+    },
+    initHeadImageUpload : function() {
+        var _this = this;
         var btnHeadImage = $("#btnHeadImage", _this.win);
         btnHeadImage.unstructuredUpload({
             authorizeType : "MANAGER_HEAD_IMAGE",
             serverPath : site.path.context + "/unstructured/upload",
             auto : true,
+            messages : {
+                "default" : {
+                    "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
+                }
+            },
             events : {
                 ready : function() {
                     var headImageUrl = $("#headImageUrl", _this.win).val();
                     if (headImageUrl) {
-                        btnHeadImage.unstructuredUpload("addFile", [ headImageUrl ], function(
-                                files) {
-                            $.each(files, function(i, file) {
-                                _this.appendImage(file.id, file.url);
-                            });
-                        });
+                        btnHeadImage.unstructuredUpload("addFile", [ headImageUrl ]);
                     }
                 },
-                uploadError : function(file, reason) {
-                    site.error(file.name + "上传失败，" + reason);
-                },
-                uploadAccept : function(block, results, updatingFileId) {
-                    var result = results[0]; // 只有一个图片
-                    // 如果存在待更新文件id，则更新文件
+                filesQueued : function(files, updatingFileId) {
+                    // 如果存在待更新文件id，则替换原文件显示
                     if (updatingFileId) {
-                        $("#" + updatingFileId).attr({
-                            "id" : block.file.id,
-                            "src" : result.readUrl + "?v=" + Math.random(),
-                        });
-                    } else { // 否则添加文件
-                        _this.appendImage(block.file.id, result.readUrl);
+                        // 只用加入队列中的第一个文件替换，其它的文件进行添加
+                        $("#" + updatingFileId, $("#btnHeadImage").parent())
+                                .attr("id", files[0].id);
                     }
+                    $.each(files, function(i, file) {
+                        if (file.getStatus() == "complete") { // 完成状态的添加文件显示
+                            _this.addFileView(file.id, file.url);
+                        } else { // 没完成的显示处理中效果图
+                            _this.showFileView(file.id);
+                        }
+                    });
+                },
+                uploadAccept : function(file, result, updatedFileId) {
+                    _this.addFileView(file.id, result.readUrl);
                     $("#headImageUrl", _this.win).val(result.storageUrl);
                     $.tnx.rpc.imports("mineController", function(rpc) {
                         rpc.updateHeadImage(result.storageUrl);
                     });
                 },
+                uploadError : function(file, reason) {
+                    site.error(file.name + "上传失败，" + reason);
+                },
                 error : function(error) {
                     site.error(error.message);
-                }
-            },
-            messages : {
-                "default" : {
-                    "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
                 }
             }
         });
     },
-    appendImage : function(fileId, fileUrl) {
+    addFileView : function(fileId, fileUrl) {
+        this.showFileView(fileId, fileUrl);
+
         var btnHeadImage = $("#btnHeadImage");
-        var imageItem = '<div class="webuploader-item">' + '<img class="webuploader-res" id="'
-                + fileId + '" ' + 'src="' + fileUrl + '?v=' + Math.random() + '">'
-                + '<div class="webuploader-headbar">' + '<i class="icon icon-times"></i></div>'
-                + '</div>'
-        btnHeadImage.parent().append(imageItem);
-        var parent = $("#" + fileId).parent();
+        var fileItem = $("#" + fileId, btnHeadImage.parent()).parent();
         var _this = this;
         // 注册文件修改事件
-        parent.click(function() {
-            var updateFileId = $(".webuploader-res", parent).attr("id");
+        fileItem.off("click");
+        fileItem.click(function() {
+            var updateFileId = $(".webuploader-res", fileItem).attr("id");
             btnHeadImage.unstructuredUpload("updateFile", updateFileId);
         });
         // 注册文件移除事件
-        $("i.icon", parent).click(function() {
+        $("i.icon", fileItem).off("click");
+        $("i.icon", fileItem).click(function() {
             window.event ? window.event.cancelBubble = true : el.stopPropagation(); // 阻止冒泡
             $.tnx.rpc.imports("mineController", function(rpc) {
                 rpc.updateHeadImage(null, function() {
-                    var removeFileId = $(".webuploader-res", parent).attr("id");
+                    var removeFileId = $(".webuploader-res", fileItem).attr("id");
                     btnHeadImage.unstructuredUpload("removeFile", removeFileId);
-                    $("#" + removeFileId).parents(".webuploader-item").remove();
+                    _this.removeFileView(removeFileId);
                 });
             });
         });
+    },
+    removeFileView : function(fileId) {
+        $("#" + fileId, $("#btnHeadImage").parent()).parents(".webuploader-item").remove();
+    },
+    showFileView : function(fileId, fileUrl) {
+        var btnHeadImage = $("#btnHeadImage");
+        var container = btnHeadImage.parent();
+        var fileObj = $("#" + fileId, container);
+        if (fileObj.length) { // 已经存在则替换
+            fileObj.removeAttr("src").removeAttr("data-original");
+            fileUrl = fileUrl || "";
+            fileObj.attr("data-src", fileUrl);
+        } else { // 不存在则添加
+            if (fileUrl) {
+                fileUrl += "?v=" + Math.random();
+            } else {
+                fileUrl = "";
+            }
+            var imageItem = '<div class="webuploader-item"><img class="webuploader-res" id="'
+                    + fileId + '" data-src="' + fileUrl + '">'
+                    + '<div class="webuploader-headbar">' + '<i class="icon icon-times"></i></div>'
+                    + '</div>';
+            container.append(imageItem);
+        }
+        $.tnx.domain.initImageLazyLoad(container);
     },
     updateFullname : function() {
         var fullnameObj = $("#fullname", this.win);
