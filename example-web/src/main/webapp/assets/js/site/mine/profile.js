@@ -29,13 +29,13 @@ site.mine.profile.Controller = site.Controller.extend({
                     "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
                 }
             },
+            data : function() {
+                var headImageUrl = $("#headImageUrl", _this.win).val();
+                if (headImageUrl) {
+                    return [ headImageUrl ];
+                }
+            },
             events : {
-                ready : function() {
-                    var headImageUrl = $("#headImageUrl", _this.win).val();
-                    if (headImageUrl) {
-                        btnHeadImage.unstructuredUpload("addFile", [ headImageUrl ]);
-                    }
-                },
                 filesQueued : function(files, updatingFileId) {
                     // 如果存在待更新文件id，则替换原文件显示
                     if (updatingFileId) {
