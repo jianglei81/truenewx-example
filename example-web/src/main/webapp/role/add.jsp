@@ -12,7 +12,8 @@
     <div class="form-group">
         <label class="col-md-2 control-label" for="name">角色名称</label>
         <div class="col-md-2">
-            <input type="text" class="form-control" id="name" name="name" validation="${validation['name']}" />
+            <input type="text" class="form-control" id="name" name="name" business="true"
+                validation="${validation['name']}" />
         </div>
         <div id="nameError" class="alert alert-danger col-md-4 field-error-hide"></div>
     </div>

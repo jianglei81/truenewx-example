@@ -8,12 +8,13 @@
 </head>
 
 <body component="validate" script="role/submit.js">
-<form class="form-horizontal" role="form" action="${context}/role/${role.id}/update" method="post" validate="true">
+<form class="form-horizontal" role="form" action="${context}/role/${role.id}/update" method="post" 
+    data-id="${role.id}" validate="true">
     <div class="form-group">
         <label class="col-md-2 control-label" for="name">角色名称</label>
         <div class="col-md-2">
-            <input type="text" class="form-control" id="name" name="name" validation="${validation['name']}" 
-                value="${role.name}" />
+            <input type="text" class="form-control" id="name" name="name" business="true"
+                validation="${validation['name']}" value="${role.name}" />
         </div>
         <div id="nameError" class="alert alert-danger col-md-4 field-error<tnx:noError field="name">-hide</tnx:noError>"></div>
     </div>

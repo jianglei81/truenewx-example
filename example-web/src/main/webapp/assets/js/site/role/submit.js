@@ -5,28 +5,7 @@ site.role.submit.Controller = site.Controller.extend({
         this.permissions = $("#permissions").val().split(",") || [];
 
         this.loadMenuItems();
-
-        var nameObj = $("#name");
-        nameObj.blur(function() {
-            var name = nameObj.val();
-            if (name) {
-                var id = $("#id").val();
-                if (id) {
-                    id = parseInt(id);
-                } else {
-                    id = null;
-                }
-                $.tnx.rpc.imports("roleController", function(rpc) {
-                    rpc.validateName(name, id, function() {
-                        $(".btn-primary").removeAttr("disabled");
-                    }, function(error) {
-                        $.tnx.validator.showFieldErrors(nameObj, error.message);
-                        $(".btn-primary").attr("disabled", "disabled");
-                    });
-                });
-            }
-        });
-
+        this.bindBusinessValidate("roleController");
         this.selectManagers();
     },
     loadMenuItems : function() {

@@ -53,7 +53,9 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
     }
 
     @Override
-    public void validateName(final String name, final Integer id) throws BusinessException {
+    public void validateBusiness(final Integer id, final SubmitRole model)
+            throws HandleableException {
+        final String name = model.getName();
         if (this.dao.countByNameExceptId(name, id) > 0) {
             throw new BusinessException(ManagerExceptionCodes.ROLE_REPEAT_NAME, name);
         }
@@ -64,8 +66,7 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
             throws HandleableException {
         if (submitModel instanceof SubmitRole) {
             final SubmitRole model = (SubmitRole) submitModel;
-            final String name = model.getName();
-            validateName(name, id);
+            validateBusiness(id, model);
 
             Role role;
             if (id == null) {
@@ -74,7 +75,7 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
             } else {
                 role = load(id);
             }
-            role.setName(name);
+            role.setName(model.getName());
             role.setRemark(model.getRemark());
             final Set<String> permissions = new HashSet<>();
             CollectionUtil.addAll(permissions, model.getPermissions());
