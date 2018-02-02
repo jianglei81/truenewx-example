@@ -29,8 +29,8 @@
             </item>
             <item caption="删除角色">
                 <action role="top">
-                    <rpc id="roleController" method="countManagers" />
                     <rpc id="roleController" method="del" />
+                    <rpc id="roleController" method="countManagers" />
                 </action>
             </item>
             <item caption="调整排序">

@@ -59,7 +59,7 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @LogExcluded(parameters = { "password", "prev" })
+    @LogExcluded(value = false, excluded = { "password", "prev" })
     public String add(final SubmitManager model) throws HandleableException {
         this.managerService.add(model);
         return "redirect:" + ProjectWebUtil.getPrevPrevUrl("/manager/list");
@@ -75,7 +75,7 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
-    @LogExcluded(parameters = { "prev" })
+    @LogExcluded(value = false, excluded = { "prev" })
     public String update(@PathVariable("id") final int id, final SubmitManager model)
             throws HandleableException {
         this.managerService.update(id, model);

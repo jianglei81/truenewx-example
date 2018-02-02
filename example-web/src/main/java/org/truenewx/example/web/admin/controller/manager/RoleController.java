@@ -20,7 +20,7 @@ import org.truenewx.example.service.manager.ManagerService;
 import org.truenewx.example.service.manager.RoleService;
 import org.truenewx.example.service.model.SubmitRole;
 import org.truenewx.example.web.admin.util.ProjectWebUtil;
-import org.truenewx.support.log.web.annotation.LogExcluded;
+import org.truenewx.service.unity.SubmitModelBusinessValidator;
 import org.truenewx.web.menu.MenuResolver;
 import org.truenewx.web.menu.model.MenuItem;
 import org.truenewx.web.rpc.server.annotation.RpcController;
@@ -37,7 +37,7 @@ import org.truenewx.web.validation.generate.annotation.ValidationGeneratable;
  */
 @RpcController
 @RequestMapping("/role")
-public class RoleController {
+public class RoleController implements SubmitModelBusinessValidator<SubmitRole, Role, Integer> {
 
     @Autowired
     private RoleService roleService;
@@ -58,6 +58,13 @@ public class RoleController {
         this.roleService.move(id, down);
     }
 
+    @Override
+    public void validateBusiness(final Integer id, final SubmitRole model)
+            throws HandleableException {
+        // TODO Auto-generated method stub
+
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ValidationGeneratable(Role.class)
     public ModelAndView toAdd() {
@@ -72,15 +79,9 @@ public class RoleController {
         return this.menuResolver.getFullMenu().getItems();
     }
 
-    @RpcMethod
-    public void validateName(final String name, final Integer id) throws BusinessException {
-        this.roleService.validateName(name, id);
-    }
-
     @RpcMethod(result = @RpcResult(filter = {
             @RpcResultFilter(type = Manager.class, includes = { "id", "username", "fullname" }),
             @RpcResultFilter(type = Paging.class, includes = { "morePage", "pageNo" }) }))
-    @LogExcluded
     public QueryResult<Manager> getSelectableManagers(final int pageNo, final Integer roleId) {
         if (roleId == null) {
             return this.managerService.findGeneral(null, 20, pageNo);
