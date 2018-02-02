@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.truenewx.core.exception.BusinessException;
@@ -56,7 +57,7 @@ public class RoleServiceImpl extends AbstractUnityService<Role, Integer> impleme
     public void validateBusiness(final Integer id, final SubmitRole model)
             throws HandleableException {
         final String name = model.getName();
-        if (this.dao.countByNameExceptId(name, id) > 0) {
+        if (StringUtils.isNotBlank(name) && this.dao.countByNameExceptId(name, id) > 0) {
             throw new BusinessException(ManagerExceptionCodes.ROLE_REPEAT_NAME, name);
         }
     }

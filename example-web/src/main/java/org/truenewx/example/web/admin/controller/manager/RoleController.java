@@ -61,8 +61,7 @@ public class RoleController implements SubmitModelBusinessValidator<SubmitRole, 
     @Override
     public void validateBusiness(final Integer id, final SubmitRole model)
             throws HandleableException {
-        // TODO Auto-generated method stub
-
+        this.roleService.validateBusiness(id, model);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
