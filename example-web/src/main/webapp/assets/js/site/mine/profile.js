@@ -25,9 +25,7 @@ site.mine.profile.Controller = site.Controller.extend({
             serverPath : site.path.context + "/unstructured/upload",
             auto : true,
             messages : {
-                "default" : {
-                    "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
-                }
+                "error.unstructured.upload.beyond_max_number" : "只能选择{0}个头像文件"
             },
             data : function() {
                 var headImageUrl = $("#headImageUrl", _this.win).val();
