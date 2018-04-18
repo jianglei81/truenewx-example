@@ -12,8 +12,7 @@ var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
     .script("${resContext}/vendor/zui/1.7.0/js/zui.min.js")
     .script("${resContext}/component/core/prototype.js")
     .script("${resContext}/component/core/truenewx.js").wait(function() {
-        $.tnx.setContext("${resContext}", "${pageContext.request.locale}");
-        $.tnx.pager.contextPath = "${context}";
+        $.tnx.setContext("${resContext}", "${context}", "${pageContext.request.locale}");
     }).script("${resContext}/component/core/truenewx-zui.js")
     .script("${resContext}/component/core/truenewx-domain.js").wait(function() {
         $.tnx.domain.site.path.context = "${context}";
