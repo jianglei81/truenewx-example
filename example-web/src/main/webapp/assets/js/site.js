@@ -1,21 +1,18 @@
 $.tnx.namespace("site");
 
 site = $.tnx.domain.site;
-site.namespace = "site";
-site.path.assets = site.path.context + "/assets";
-site.path.js = site.path.assets + "/js";
 site.requiredClass = "required";
 
 $.extend(site.components, {
     "jquery-ui" : site.path.context + "/third/jquery/ui/js/jquery-ui.js",
-    "validate" : [ site.path.resContext + "/component/core/truenewx-validate.js" ],
-    "md5" : site.path.resContext + "/vendor/core/md5-2.1.js",
-    "input-limiter" : site.path.resContext + "/component/input-limiter/js/input-limiter.js",
-    "ckeditor" : site.path.resContext + "/vendor/ckeditor/4.5.10/ckeditor.js",
-    "chart" : [ site.path.resContext + "/vendor/echarts/3.2.2/echarts.min.js" ],
-    "lazyload" : site.path.resContext + "/vendor/jquery/plugins/jquery.lazyload-1.9.3.min.js",
-    "upload" : [ site.path.resContext + "/vendor/webuploader/0.1.7-alpha/js/webuploader.nolog.js",
-            site.path.resContext + "/component/unstructured-upload/js/unstructured-upload.js" ]
+    "validate" : [ $.tnx.context + "/component/core/truenewx-validate.js" ],
+    "md5" : $.tnx.context + "/vendor/core/md5-2.1.js",
+    "input-limiter" : $.tnx.context + "/component/input-limiter/js/input-limiter.js",
+    "ckeditor" : $.tnx.context + "/vendor/ckeditor/4.5.10/ckeditor.js",
+    "chart" : [ $.tnx.context + "/vendor/echarts/3.2.2/echarts.min.js" ],
+    "lazyload" : $.tnx.context + "/vendor/jquery/plugins/jquery.lazyload-1.9.3.min.js",
+    "upload" : [ $.tnx.context + "/vendor/webuploader/0.1.7-alpha/js/webuploader.nolog.js",
+            $.tnx.context + "/component/unstructured-upload/js/unstructured-upload.js" ]
 });
 
 $.extend(site, {

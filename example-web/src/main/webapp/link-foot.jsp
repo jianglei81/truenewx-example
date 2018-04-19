@@ -15,8 +15,6 @@ var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
         $.tnx.setContext("${resContext}", "${context}", "${pageContext.request.locale}");
     }).script("${resContext}/component/core/truenewx-zui.js")
     .script("${resContext}/component/core/truenewx-domain.js").wait(function() {
-        $.tnx.domain.site.path.context = "${context}";
-        $.tnx.domain.site.path.resContext = "${resContext}";
         $.tnx.domain.site.version = "<tnx:version build="${build}"/>";
     }).script("${context}/assets/js/site.js?v=<tnx:version build="${build}"/>");
     
