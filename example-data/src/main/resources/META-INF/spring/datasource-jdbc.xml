@@ -27,10 +27,10 @@
         <property name="databaseName" value="example_core" />
         <property name="useUnicode" value="true" />
         <property name="characterEncoding">
-            <util:constant static-field="org.truenewx.core.Strings.DEFAULT_ENCODING" />
+            <util:constant static-field="org.truenewx.core.Strings.ENCODING_UTF8" />
         </property>
         <property name="characterSetResults">
-            <util:constant static-field="org.truenewx.core.Strings.DEFAULT_ENCODING" />
+            <util:constant static-field="org.truenewx.core.Strings.ENCODING_UTF8" />
         </property>
         <property name="user" value="${ds.username}" />
         <property name="password" value="${ds.password}" />
