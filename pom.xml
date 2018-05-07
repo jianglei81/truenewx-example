@@ -13,8 +13,8 @@
         <maven.build.timestamp.format>MddHHmmss</maven.build.timestamp.format>
         <project.build.timestamp>${maven.build.timestamp}</project.build.timestamp>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <truenewx.version>2.0.0</truenewx.version>
-        <truenewx-support.version>2.0.0</truenewx-support.version>
+        <truenewx.version>2.1.0</truenewx.version>
+        <truenewx-support.version>2.1.0</truenewx-support.version>
     </properties>
     <modules>
         <module>example-config</module>
