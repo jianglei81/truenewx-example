@@ -18,7 +18,7 @@ var lab = $LAB.script("${resContext}/vendor/core/extend-1.0.0.js")
         $.tnx.domain.site.version = "<tnx:version build="${build}"/>";
     }).script("${context}/assets/js/site.js?v=<tnx:version build="${build}"/>");
     
-<c:if test="${not empty script}">
+<c:if test="${not empty param.script}">
     var scripts = "${param.script}".split(",");
     for (var i = 0; i < scripts.length; i++) {
         lab.script("${context}/assets/js/site/" + scripts[i] + "?v=<tnx:version build="${build}"/>");
