@@ -11,8 +11,25 @@
         <many-to-one name="manager" column="manager_id"
             class="org.truenewx.example.data.model.manager.Manager" not-null="true" />
         <property name="createTime" column="create_time" type="timestamp" not-null="true" />
-        <property name="action" column="action_string" length="4000" not-null="true"
-            type="org.truenewx.support.log.data.usertype.ActionJsonMapType" />
+        <component name="action" class="org.truenewx.support.log.data.model.Action"
+            lazy="false">
+            <property name="caption" type="string" column="action_caption" not-null="true"
+                length="50" />
+            <property name="beanId" type="string" column="action_bean_id" not-null="true"
+                length="500" />
+            <property name="method" type="string" column="action_method" not-null="true"
+                length="500" />
+            <property name="url" type="string" column="action_url" not-null="false"
+                length="2000" />
+            <property name="params" column="action_param_string" not-null="false"
+                length="65535">
+                <type name="org.truenewx.hibernate.usertype.MapJsonMapType" />
+            </property>
+            <property name="args" column="action_arg_string" not-null="false"
+                length="65535">
+                <type name="org.truenewx.hibernate.usertype.ListJsonMapType" />
+            </property>
+        </component>
     </class>
 
 </hibernate-mapping>

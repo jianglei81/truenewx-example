@@ -51,7 +51,7 @@
                 <c:if test="${log.action.type == 'RPC'}">
                     <c:set var="argString" value="${log.action.args} "/>
                     <c:set var="argStringLength" value="${fn:length(argString)}"/>
-                    ${log.action.beanId}.${log.action.methodName}(${fn:substring(argString, 1, argStringLength - 2)})
+                    ${log.action.beanId}.${log.action.method}(${fn:substring(argString, 1, argStringLength - 2)})
                 </c:if>
                 </td>
             </tr>

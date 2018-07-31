@@ -33,7 +33,12 @@ CREATE TABLE T_ACTION_LOG (
  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  manager_id INT NOT NULL,
  create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
- action_string VARCHAR(4000) NOT NULL,
+ action_caption VARCHAR(50) NOT NULL,
+ action_bean_id VARCHAR(500) NOT NULL,
+ action_method VARCHAR(500) NOT NULL,
+ action_url VARCHAR(2000),
+ action_param_string TEXT,
+ action_arg_string TEXT,
  
  FOREIGN KEY (manager_id) REFERENCES T_MANAGER (id)
 );
