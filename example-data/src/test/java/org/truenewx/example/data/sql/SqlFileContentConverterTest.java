@@ -30,7 +30,7 @@ public class SqlFileContentConverterTest extends JUnit4SpringContextTest {
     public void testConvert() {
         final String dir = "file://E:/workspace/example/example-data";
         this.converter.convert(dir + "/src/main/resources/sql/junit/create/*.sql",
-                Strings.DEFAULT_ENCODING);
+                Strings.ENCODING_UTF8);
     }
 
 }

@@ -27,7 +27,7 @@
         </property>
         <property name="useCodeAsDefaultMessage" value="true" />
         <property name="defaultEncoding">
-            <util:constant static-field="org.truenewx.core.Strings.DEFAULT_ENCODING" />
+            <util:constant static-field="org.truenewx.core.Strings.ENCODING_UTF8" />
         </property>
         <property name="cacheSeconds" value="60" />
     </bean>
