@@ -47,18 +47,20 @@ site.role.submit.Controller = site.Controller.extend({
             index = parentIndex + "-" + index;
         }
         var node = {};
-        node.html = '<div class="checkbox"><label><input type="checkbox" name="permissions"';
+        node.html = '<div class="checkbox" index="' + index + '"';
         if (parentIndex != undefined) {
             node.html += ' parent-index="' + parentIndex + '"';
         }
-        node.html += ' index="' + index + '"';
-        if (item.authority && item.authority.permission) {
+        node.html += '><label>';
+        if (item.authority && item.authority.permission) { // 有权限限定才生成复选框
+            node.html += '<input type="checkbox" name="permissions"';
             node.html += ' value="' + item.authority.permission + '"';
             if ($.inArray(item.authority.permission, this.permissions) >= 0) {
                 node.html += ' checked="checked"';
             }
+            node.html += '/> ';
         }
-        node.html += '/> ' + item.caption;
+        node.html += item.caption;
         if (item.authority && item.authority.caption) {
             node.html += '<span class="text-muted">（' + item.authority.caption + '）</span>';
         }
@@ -66,7 +68,8 @@ site.role.submit.Controller = site.Controller.extend({
         var _this = this;
         node.children = [];
         if (item.subs && item.subs.length) {
-            node.html += '<button type="button" class="btn btn-link" style="padding: 0px;"'
+            node.html += '<button type="button" class="btn btn-link"'
+                    + ' style="padding: 0px; margin-left: 15px;"'
                     + ' onclick="controller.selectNodeAndChildren(this)">全选</button>';
             item.subs.each(function(sub, subIndex) {
                 var child = _this.toTreeNode(sub, subIndex, index);
@@ -83,30 +86,36 @@ site.role.submit.Controller = site.Controller.extend({
     },
     selectNodeAndChildren : function(element, checked) {
         element = $(element);
-        var checkbox = $("input[name='permissions']", element.parent());
+        if (!element.is(".checkbox")) {
+            element = element.parents(".checkbox");
+        }
+        var input = $("input[name='permissions']", element);
+        var index = element.attr("index");
         if (checked == undefined) {
-            checked = !this.isChecked(checkbox);
+            checked = !this.isChecked(input, index);
         }
-        if (checked) {
-            checkbox.prop("checked", "checked");
-        } else {
-            checkbox.removeAttr("checked");
+        if (input.length) {
+            if (checked) {
+                input.prop("checked", "checked");
+            } else {
+                input.removeAttr("checked");
+            }
         }
-        var index = checkbox.attr("index");
         var _this = this;
-        $("#permissionTree input[parent-index='" + index + "']").each(function(i, sub) {
+        $("#permissionTree [parent-index='" + index + "']").each(function(i, sub) {
             _this.selectNodeAndChildren(sub, checked);
         });
     },
-    isChecked : function(checkbox) {
-        if (!checkbox.is(":checked")) {
+    isChecked : function(input, index) {
+        if (input.length && !input.is(":checked")) {
             return false;
         }
-        var index = checkbox.attr("index");
-        var subs = $("#permissionTree input[parent-index='" + index + "']");
+        var subs = $("#permissionTree [parent-index='" + index + "']");
         for (var i = 0; i < subs.length; i++) {
             var sub = $(subs[i]);
-            if (!this.isChecked(sub)) {
+            var subInput = $("input[name='permissions']", sub);
+            var subIndex = sub.attr("index");
+            if (!this.isChecked(subInput, subIndex)) {
                 return false;
             }
         }
