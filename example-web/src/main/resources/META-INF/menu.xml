@@ -71,7 +71,7 @@
         </item>
     </item>
     <item caption="用户管理" icon="icon-user">
-        <action href="/user/list" permission="USER_LIST" />
+        <action href="/user/list" permission="USER_LIST" caption="查询用户清单" />
         <item caption="查看用户详情">
             <action permission="USER_DETAIL">
                 <link href="/user/*/detail" />

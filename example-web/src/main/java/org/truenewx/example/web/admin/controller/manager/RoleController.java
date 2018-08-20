@@ -73,7 +73,7 @@ public class RoleController implements SubmitModelBusinessValidator<SubmitRole, 
     }
 
     @RpcMethod(result = @RpcResult(filter = @RpcResultFilter(type = MenuItem.class,
-            includes = { "caption", "permission", "subs" })))
+            includes = { "caption", "authority", "subs" })))
     public List<MenuItem> getMenuItems() {
         return this.menuResolver.getFullMenu().getItems();
     }

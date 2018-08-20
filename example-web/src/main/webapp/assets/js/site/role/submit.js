@@ -52,17 +52,22 @@ site.role.submit.Controller = site.Controller.extend({
             node.html += ' parent-index="' + parentIndex + '"';
         }
         node.html += ' index="' + index + '"';
-        if (item.permission) {
-            node.html += ' value="' + item.permission + '"';
-            if ($.inArray(item.permission, this.permissions) >= 0) {
+        if (item.authority && item.authority.permission) {
+            node.html += ' value="' + item.authority.permission + '"';
+            if ($.inArray(item.authority.permission, this.permissions) >= 0) {
                 node.html += ' checked="checked"';
             }
         }
-        node.html += '/> ' + item.caption + '</label></div>';
-
+        node.html += '/> ' + item.caption;
+        if (item.authority && item.authority.caption) {
+            node.html += '<span class="text-muted">（' + item.authority.caption + '）</span>';
+        }
+        node.html += '</label>';
         var _this = this;
         node.children = [];
         if (item.subs && item.subs.length) {
+            node.html += '<button type="button" class="btn btn-link" style="padding: 0px;"'
+                    + ' onclick="controller.selectNodeAndChildren(this)">全选</button>';
             item.subs.each(function(sub, subIndex) {
                 var child = _this.toTreeNode(sub, subIndex, index);
                 if (child) {
@@ -70,10 +75,42 @@ site.role.submit.Controller = site.Controller.extend({
                 }
             });
         }
-        if (item.permission == undefined && node.children.length == 0) {
+        node.html += '</div>';
+        if ((!item.authority || !item.authority.permission) && node.children.length == 0) {
             return undefined; // 没有权限限定，且没有子级，则无效
         }
         return node;
+    },
+    selectNodeAndChildren : function(element, checked) {
+        element = $(element);
+        var checkbox = $("input[name='permissions']", element.parent());
+        if (checked == undefined) {
+            checked = !this.isChecked(checkbox);
+        }
+        if (checked) {
+            checkbox.prop("checked", "checked");
+        } else {
+            checkbox.removeAttr("checked");
+        }
+        var index = checkbox.attr("index");
+        var _this = this;
+        $("#permissionTree input[parent-index='" + index + "']").each(function(i, sub) {
+            _this.selectNodeAndChildren(sub, checked);
+        });
+    },
+    isChecked : function(checkbox) {
+        if (!checkbox.is(":checked")) {
+            return false;
+        }
+        var index = checkbox.attr("index");
+        var subs = $("#permissionTree input[parent-index='" + index + "']");
+        for (var i = 0; i < subs.length; i++) {
+            var sub = $(subs[i]);
+            if (!this.isChecked(sub)) {
+                return false;
+            }
+        }
+        return true;
     },
     toggleManager : function(obj) {
         var managerId = $(obj).attr("data-id");
