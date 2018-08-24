@@ -2,6 +2,7 @@ $.tnx.namespace("site.manager.list");
 
 site.manager.list.Controller = site.Controller.extend({
     onLoad : function() {
+        $.tnx.rpc.imports("managerController", true);
     },
     toResetPassword : function(id) {
         var url = site.path.context + "/manager/" + id + "/password.win";
@@ -27,18 +28,16 @@ site.manager.list.Controller = site.Controller.extend({
 
             var managerId = parseInt($("#managerId").val());
             var md5Password = hex_md5(password);
-            var rpc = $.tnx.rpc.imports("managerController");
             var _this = this;
-            rpc.resetPassword(managerId, md5Password, function() {
+            $.tnx.rpcs.managerController.resetPassword(managerId, md5Password, function() {
                 _this.close();
                 site.success("重置密码成功");
             });
         }));
     },
     reverseDisabled : function(managerId, disabled) {
-        var rpc = $.tnx.rpc.imports("managerController");
         var _this = this;
-        rpc.reverseDisabled(managerId, disabled, function(newDisabled) {
+        $.tnx.rpcs.managerController.reverseDisabled(managerId, disabled, function(newDisabled) {
             if (newDisabled) {
                 $("#iconDisable_" + managerId).addClass("hidden");
                 $("#iconEnable_" + managerId).removeClass("hidden");

@@ -55,7 +55,7 @@ site.log.system.Controller = site.Controller.extend({
         var appender = this.getAppender();
         var _this = this;
         var pre = $("#logContainer pre:last");
-        var rpc = $.tnx.rpc.imports("systemLogController", function(rpc) {
+        $.tnx.rpc.imports("systemLogController", function(rpc) {
             if (pre.length) { // 已有日志内容，则取最后一条之后的
                 var pos = parseInt(pre.attr("data-pos"));
                 rpc.getAfter(appender, pos, function(lines) {
