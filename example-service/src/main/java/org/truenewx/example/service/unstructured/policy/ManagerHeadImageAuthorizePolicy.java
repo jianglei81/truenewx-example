@@ -21,7 +21,7 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
     }
 
     @Override
-    public UnstructuredUploadLimit getUploadLimit(final Manager user) {
+    public UnstructuredUploadLimit getUploadLimit(Manager user) {
         return new UnstructuredUploadLimit(1, 150 * 1024, "jpg", "png");
     }
 
@@ -36,17 +36,17 @@ public class ManagerHeadImageAuthorizePolicy extends ManagerUnstructuredAuthoriz
     }
 
     @Override
-    public String getPath(final Manager manager, final String filename) {
+    public String getPath(String token, Manager manager, String filename) {
         return "manager/" + manager.getId() + Strings.SLASH + filename;
     }
 
     @Override
-    public boolean isReadable(final Manager manager, final String path) {
+    public boolean isReadable(Manager manager, String path) {
         return manager != null && path.startsWith("manager/");
     }
 
     @Override
-    public boolean isWritable(final Manager manager, final String path) {
+    public boolean isWritable(Manager manager, String path) {
         return isReadable(manager, path); // 读写权限判断一致
     }
 
