@@ -22,9 +22,6 @@
             <properties>
                 <portable.profile>test</portable.profile>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
         <profile>
             <id>product</id>
